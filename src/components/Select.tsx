@@ -13,7 +13,7 @@ const Select = ({ defaultText, setSelectedText }: SelectProps) => {
       onClick={(e) => setSelectedText(e.currentTarget)}
     >
       <option defaultValue={defaultText}>I want to find talent</option>
-      <option value="1">I want to help beginners</option>
+      <option value="1">I want to provide my skills</option>
       <option value="2">I want to provide opportunities</option>
     </select>
   );
