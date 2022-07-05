@@ -1,4 +1,5 @@
 import React from "react";
+import CandidatesSection from "../components/CandidatesSection";
 import CompanyCarousel from "../components/CompanyCarousel";
 import Hero from "../components/Hero";
 import Navbar, { NavLinkType } from "../components/Navbar";
@@ -47,7 +48,10 @@ function Homepage() {
       <Navbar links={homepageLinks} buttons={homepageButtons} />
       <Hero />
       <h3 className="display-7 text-center my-5">Our Hiring Partners</h3>
-      <CompanyCarousel />
+      <div className="mx-3">
+        <CompanyCarousel />
+      </div>
+      <CandidatesSection />
     </div>
   );
 }

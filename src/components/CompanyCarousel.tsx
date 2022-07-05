@@ -23,8 +23,8 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 5,
-    slidesToSlide: 3, // optional, default to 1.
+    items: 3,
+    slidesToSlide: 2, // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -60,9 +60,9 @@ const CompanyCarousel = () => (
     keyBoardControl={true}
     customTransition="all .5"
     transitionDuration={500}
+    className="px-5"
     containerClass="carousel-container"
-    removeArrowOnDeviceType={["tablet", "mobile"]}
-    itemClass="carousel-item-padding-1-px"
+    itemClass="carousel-item-padding-40-px px-10"
   >
     {carouselItems.map((post, index) => (
       <div className="text-left" key={index}>
