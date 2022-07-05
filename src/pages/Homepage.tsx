@@ -47,7 +47,7 @@ function Homepage() {
     <div className="App">
       <Navbar links={homepageLinks} buttons={homepageButtons} />
       <Hero />
-      <h3 className="display-7 text-center my-5">Our Hiring Partners</h3>
+      <h3 className="display-7 text-center my-5 pb-2">Our Hiring Partners</h3>
       <div className="mx-3">
         <CompanyCarousel />
       </div>
