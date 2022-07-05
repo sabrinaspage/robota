@@ -33,7 +33,7 @@ const IWantSection = () => (
           >
             <h3 className="mt-3 display-7 fw-light text-uppercase">{who}</h3>
             <h1 className="display-7 mt-1 fw-bold">{what}</h1>
-            <h5 className="mt-3 display-7 flex-grow-1">{about}</h5>
+            <h3 className="mt-3 fw-light display-7 flex-grow-1">{about}</h3>
             <a href={go} className="mt-auto">
               <img className="mt-auto" src={GoIcon} />
             </a>
