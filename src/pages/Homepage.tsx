@@ -4,6 +4,7 @@ import CompanyCarousel from "../components/CompanyCarousel";
 import Hero from "../components/Hero";
 import Navbar, { NavLinkType } from "../components/Navbar";
 import { ButtonTypes } from "../components/RobotaButton";
+import Impressions from "../components/Impressions";
 
 const homepageLinks: NavLinkType[] = [
   {
@@ -52,6 +53,11 @@ function Homepage() {
         <CompanyCarousel />
       </div>
       <CandidatesSection />
+      <h3 className="display-6 text-center my-5 pb-2 fw-bold">
+        Unlocking human potential and enabling Ukranians to continue working,
+        wherever they are.
+      </h3>
+      <Impressions />
     </div>
   );
 }
