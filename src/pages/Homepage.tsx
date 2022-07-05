@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "../components/Hero";
 import Navbar, { NavLinkType } from "../components/Navbar";
 import { ButtonTypes } from "../components/RobotaButton";
+import CompanyCarousel from "../components/CompanyCarousel";
 
 const homepageLinks: NavLinkType[] = [
   {
@@ -45,6 +46,7 @@ function Homepage() {
     <div className="App">
       <Navbar links={homepageLinks} buttons={homepageButtons} />
       <Hero />
+      <CompanyCarousel />
     </div>
   );
 }
