@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 import Navbar, { NavLinkType } from "../components/Navbar";
 import { ButtonTypes } from "../components/RobotaButton";
 import Impressions from "../components/Impressions";
+import IWantSection from "../components/IWantSection";
 
 const homepageLinks: NavLinkType[] = [
   {
@@ -58,6 +59,7 @@ function Homepage() {
         wherever they are.
       </h3>
       <Impressions />
+      <IWantSection />
     </div>
   );
 }
