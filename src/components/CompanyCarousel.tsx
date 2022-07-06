@@ -2,18 +2,18 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Company1 from "../images/company-carousel/company1.png";
-import Company2 from "../images/company-carousel/company2.png";
-import Company3 from "../images/company-carousel/company3.png";
-import Company4 from "../images/company-carousel/company4.png";
-import Company5 from "../images/company-carousel/company5.png";
-import Company6 from "../images/company-carousel/company6.png";
-import Company7 from "../images/company-carousel/company7.png";
-import Company8 from "../images/company-carousel/company8.png";
-import Company9 from "../images/company-carousel/company9.png";
-import Company10 from "../images/company-carousel/company10.png";
-import Company11 from "../images/company-carousel/company11.png";
-import Company12 from "../images/company-carousel/company12.png";
+import Company1 from "../images/company-carousel/accenture.png";
+import Company2 from "../images/company-carousel/amazon.png";
+import Company3 from "../images/company-carousel/citibank.png";
+import Company4 from "../images/company-carousel/deloitte.png";
+import Company5 from "../images/company-carousel/ey.png";
+import Company6 from "../images/company-carousel/grammarly.png";
+import Company7 from "../images/company-carousel/kpmg.png";
+import Company8 from "../images/company-carousel/microsoft.png";
+import Company9 from "../images/company-carousel/pwc.png";
+import Company10 from "../images/company-carousel/remote.png";
+import Company11 from "../images/company-carousel/sap.png";
+import Company12 from "../images/company-carousel/twilio.png";
 
 const responsive = {
   desktop: {

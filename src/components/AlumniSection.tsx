@@ -1,6 +1,6 @@
-import SAP from "../images/company-carousel/company9.png";
-import Microsoft from "../images/company-carousel/company7.png";
-import Accenture from "../images/company-carousel/company1.png";
+import Deloitte from "../images/company-carousel/deloitte.png";
+import Microsoft from "../images/company-carousel/microsoft.png";
+import Twilio from "../images/company-carousel/twilio.png";
 
 import Person1 from "../images/alumni-logos/Person1.png";
 import Person2 from "../images/alumni-logos/Person2.png";
@@ -8,7 +8,7 @@ import Person3 from "../images/alumni-logos/Person3.png";
 
 const textAndImage = [
   {
-    brand: SAP,
+    brand: Deloitte,
     alumni: Person1,
     bgColor: "#EBFDFC",
   },
@@ -17,19 +17,22 @@ const textAndImage = [
     alumni: Person2,
     bgColor: "#CCF9F6",
   },
-  { brand: Accenture, alumni: Person3, bgColor: "#ACDFDC" },
+  { brand: Twilio, alumni: Person3, bgColor: "#ACDFDC" },
 ];
 
 const AlumniSection = () => (
   <div className="container mt-5">
     <div className="row">
       {textAndImage.map(({ brand, alumni, bgColor }) => (
-        <div style={{ backgroundColor: bgColor }} className="col-sm ">
-          <div className="justify-content-start">
-            <img src={brand} alt="brand" />
+        <div
+          style={{ backgroundColor: bgColor }}
+          className="col-sm d-flex flex-column mx-5 px-3 pt-2 rounded-5"
+        >
+          <div className="justify-content-start my-2">
+            <img src={brand} alt="brand" width="180" height="relative" />
           </div>
-          <div className="justify-content-center">
-            <img src={alumni} alt="alumni" />
+          <div className="d-flex justify-content-center mt-auto">
+            <img src={alumni} alt="alumni" width="200" height="relative" />
           </div>
         </div>
       ))}
