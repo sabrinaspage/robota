@@ -7,6 +7,7 @@ import { ButtonTypes } from "../components/RobotaButton";
 import Impressions from "../components/Impressions";
 import IWantSection from "../components/IWantSection";
 import AlumniSection from "../components/AlumniSection";
+import Footer from "../components/Footer";
 
 const homepageLinks: NavLinkType[] = [
   {
@@ -63,6 +64,7 @@ function Homepage() {
       <IWantSection />
       <h3 className="display-7 text-center my-5 pb-2">Our Alumni</h3>
       <AlumniSection />
+      <Footer />
     </div>
   );
 }
