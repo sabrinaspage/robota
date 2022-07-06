@@ -6,7 +6,6 @@ import Company1 from "../images/company-carousel/accenture.png";
 import Company2 from "../images/company-carousel/amazon.png";
 import Company3 from "../images/company-carousel/citibank.png";
 import Company4 from "../images/company-carousel/deloitte.png";
-import Company5 from "../images/company-carousel/ey.png";
 import Company6 from "../images/company-carousel/grammarly.png";
 import Company7 from "../images/company-carousel/kpmg.png";
 import Company8 from "../images/company-carousel/microsoft.png";
@@ -38,7 +37,6 @@ const carouselItems = [
   { imgUrl: Company2 },
   { imgUrl: Company3 },
   { imgUrl: Company4 },
-  { imgUrl: Company5 },
   { imgUrl: Company6 },
   { imgUrl: Company7 },
   { imgUrl: Company8 },
