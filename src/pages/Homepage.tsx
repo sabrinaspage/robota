@@ -1,13 +1,13 @@
 import React from "react";
-import CandidatesSection from "../components/CandidatesSection";
-import CompanyCarousel from "../components/CompanyCarousel";
-import Hero from "../components/Hero";
+import CandidatesSection from "../components/Homepage/CandidatesSection";
+import CompanyCarousel from "../components/Homepage/CompanyCarousel";
+import Hero from "../components/Homepage/Hero";
 import Navbar, { NavLinkType } from "../components/Navbar";
 import { ButtonTypes } from "../components/RobotaButton";
-import Impressions from "../components/Impressions";
-import IWantSection from "../components/IWantSection";
-import AlumniSection from "../components/AlumniSection";
-import Footer from "../components/Footer";
+import Impressions from "../components/Homepage/Impressions";
+import IWantSection from "../components/Homepage/IWantSection";
+import AlumniSection from "../components/Homepage/AlumniSection";
+import Footer from "../components/Homepage/Footer";
 
 const homepageLinks: NavLinkType[] = [
   {

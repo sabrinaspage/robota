@@ -1,11 +1,11 @@
-import Deloitte from "../images/company-carousel/deloitte.png";
-import Microsoft from "../images/company-carousel/microsoft.png";
-import Twilio from "../images/company-carousel/twilio.png";
+import Deloitte from "../../images/company-carousel/deloitte.png";
+import Microsoft from "../../images/company-carousel/microsoft.png";
+import Twilio from "../../images/company-carousel/twilio.png";
 
-import Person1 from "../images/alumni-logos/Person1.png";
-import Person2 from "../images/alumni-logos/Person2.png";
-import Person3 from "../images/alumni-logos/Person3.png";
-import RobotaButton, { ButtonTypes } from "./RobotaButton";
+import Person1 from "../../images/alumni-logos/Person1.png";
+import Person2 from "../../images/alumni-logos/Person2.png";
+import Person3 from "../../images/alumni-logos/Person3.png";
+import RobotaButton, { ButtonTypes } from "../RobotaButton";
 
 const textAndImage = [
   {
