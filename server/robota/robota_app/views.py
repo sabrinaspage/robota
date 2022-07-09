@@ -53,6 +53,11 @@ class SignUpApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
+        # check if the user exists
+        check_user_email = User.objects.filter(email=request.data.get('email'))
+        if check_user_email:
+            return Response({"error": "Email already exists"}, status=status.HTTP_400_BAD_REQUEST)
+
         ''' Create a User '''
         data = {
             'email': request.data.get('email'), 
@@ -76,10 +81,10 @@ class LoginApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        # check for the user exists
-        check_user = User.objects.filter(email=request.data.get('email'))
-        if check_user:
-            user = check_user.values()[0]
+        # check if the user exists
+        check_user_email = User.objects.filter(email=request.data.get('email'))
+        if check_user_email:
+            user = check_user_email.values()[0]
             # check for password
             if user["password"] == request.data.get('password'):
                 return Response(user, status=status.HTTP_201_CREATED)
