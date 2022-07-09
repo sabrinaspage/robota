@@ -24,4 +24,7 @@ yarn-error.log*
 
 # server
 env
-
+.env
+# we will use portgresql
+db.sqlite3
+*.pyc
