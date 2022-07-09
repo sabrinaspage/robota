@@ -28,3 +28,4 @@ env
 # we will use portgresql
 db.sqlite3
 *.pyc
+cloud_sql_proxy
