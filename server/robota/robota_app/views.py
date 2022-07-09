@@ -91,3 +91,8 @@ class LoginApiView(APIView):
 
         return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
 
+class JobApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    pass
+
