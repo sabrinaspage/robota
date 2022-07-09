@@ -34,3 +34,55 @@ class CompanyApiView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# GENERAL USER API
+class UserApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the users
+        '''
+        users = User.objects.all().values_list()
+        return Response(users, status=status.HTTP_200_OK)
+
+#USER SIGNUP API
+class SignUpApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        ''' Create a User '''
+        data = {
+            'email': request.data.get('email'), 
+            'fname': request.data.get('fname'), 
+            'lname': request.data.get('lname'),
+            'password': request.data.get('password'),
+            'gender': request.data.get('gender'),
+            'cv': request.data.get('cv'),
+        }
+
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+#USER LOGIN API
+class LoginApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        # check for the user exists
+        check_user = User.objects.filter(email=request.data.get('email'))
+        if check_user:
+            user = check_user.values()[0]
+            # check for password
+            if user["password"] == request.data.get('password'):
+                return Response(user, status=status.HTTP_201_CREATED)
+
+        return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+
