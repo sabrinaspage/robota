@@ -91,25 +91,24 @@ class LoginApiView(APIView):
 
         return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
 
-class JobApiView(APIView):
-    # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+# class JobApiView(APIView):
+#     # add permission to check if user is authenticated
+#     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
+#     def post(self, request, *args, **kwargs):
 
-        action = request.data.get('action')
-        check_apply = JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user'))
+#         action = request.data.get('action')
+#         check_apply = JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user'))
 
-        if action == "apply":
-            check_apply = JobUser.objects.filter(companyJob=, user=)
-        else:
-        # check if the user exists
-        check_user_email = User.objects.filter(email=request.data.get('email'))
-        if check_user_email:
-            user = check_user_email.values()[0]
-            # check for password
-            if user["password"] == request.data.get('password'):
-                return Response(user, status=status.HTTP_201_CREATED)
+#         if action == "apply":
+#             check_apply = JobUser.objects.filter(companyJob=, user=)
+#         else:
+#         # check if the user exists
+#         check_user_email = User.objects.filter(email=request.data.get('email'))
+#         if check_user_email:
+#             user = check_user_email.values()[0]
+#             # check for password
+#             if user["password"] == request.data.get('password'):
+#                 return Response(user, status=status.HTTP_201_CREATED)
 
-        return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
-
+#         return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
