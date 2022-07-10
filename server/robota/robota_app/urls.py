@@ -4,7 +4,7 @@ from .views import (
     UserApiView,
     LoginApiView,
     SignUpApiView,
-    JobApiView
+    # JobApiView
 )
 
 urlpatterns = [
@@ -12,5 +12,5 @@ urlpatterns = [
     path('user/login/', LoginApiView.as_view()),
     path('user/signup/', SignUpApiView.as_view()),
     path('user/', UserApiView.as_view()),
-    path('job/', JobApiView.as_view()),
+    # path('job/', JobApiView.as_view()),
 ]
