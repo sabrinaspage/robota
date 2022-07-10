@@ -59,4 +59,12 @@ class JobUser(models.Model):
         return '{} - {}'.format(self.companyJob, self.user)
 
 
-
+class UserSkill(models.Model):
+    user = models.ForeignKey(
+    'User',
+    on_delete=models.CASCADE,
+    )
+    name = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return '{} - {}'.format(self.user, self.name)
