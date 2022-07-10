@@ -7,9 +7,18 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ["email", "description", "name"]
         
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["email", "fname", "lname", "password", "gender", "cv"]
+        
+class JobUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["companyJob", "user", "status"]
+
+class UserSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["user", "name"]
         

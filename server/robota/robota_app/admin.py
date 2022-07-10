@@ -7,4 +7,5 @@ admin.site.register(Company)
 admin.site.register(CompanyJob)
 admin.site.register(JobSkill)
 admin.site.register(JobUser)
+admin.site.register(UserSkill)
 

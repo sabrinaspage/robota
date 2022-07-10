@@ -58,7 +58,7 @@ class JobUser(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.companyJob, self.user)
 
-
+# Skills related to the user
 class UserSkill(models.Model):
     user = models.ForeignKey(
     'User',

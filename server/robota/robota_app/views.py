@@ -47,7 +47,7 @@ class UserApiView(APIView):
         users = User.objects.all().values_list()
         return Response(users, status=status.HTTP_200_OK)
 
-#USER SIGNUP API
+# USER SIGNUP API
 class SignUpApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
@@ -75,7 +75,7 @@ class SignUpApiView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#USER LOGIN API
+# USER LOGIN API
 class LoginApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
@@ -91,24 +91,73 @@ class LoginApiView(APIView):
 
         return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
 
-# class JobApiView(APIView):
-#     # add permission to check if user is authenticated
-#     permission_classes = [permissions.IsAuthenticated]
+# JOB APPLY
+class ApplyJobApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        check_apply = JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user'))
 
-#     def post(self, request, *args, **kwargs):
+        # if not applied
+        if not check_apply:
+            data = {
+                'companyJob': request.data.get('companyJob'), 
+                'user': request.data.get('user'),
+                'status': 0
+            }
 
-#         action = request.data.get('action')
-#         check_apply = JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user'))
+            serializer = JobUserSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response({"result": "User already applied"}, status=status.HTTP_201_CREATED)
 
-#         if action == "apply":
-#             check_apply = JobUser.objects.filter(companyJob=, user=)
-#         else:
-#         # check if the user exists
-#         check_user_email = User.objects.filter(email=request.data.get('email'))
-#         if check_user_email:
-#             user = check_user_email.values()[0]
-#             # check for password
-#             if user["password"] == request.data.get('password'):
-#                 return Response(user, status=status.HTTP_201_CREATED)
+# JOB UNAPPLY
+class UnapplyJobApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user')).delete()
+        return Response({"result": "User unapplied"}, status=status.HTTP_201_CREATED)
 
-#         return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+# ADD SKILL
+class AddSkillApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        data = {
+            'user': request.data.get('user'),
+            'name': request.data.get('name'), 
+        }
+
+        serializer = UserSkillSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"result": "User added skill"}, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# REMOVE SKILL
+class RemoveSkillApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        UserSkill.objects.filter(user=request.data.get('user'), name=request.data.get('name')).delete()
+        return Response({"result": "User removed skill"}, status=status.HTTP_201_CREATED)
+
+# GET USER SKILL LIST
+class UserSkillApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def get(self, request, *args, **kwargs):
+        user_skill_list = UserSkill.objects.filter(user=request.data.get('user')).values()
+        return Response(user_skill_list, status=status.HTTP_201_CREATED)
+
+# GET USER JOB LIST
+class JobUserApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def get(self, request, *args, **kwargs):
+        user_job_list = JobUser.objects.filter(user=request.data.get('user')).values()
+        return Response(user_job_list, status=status.HTTP_201_CREATED)
