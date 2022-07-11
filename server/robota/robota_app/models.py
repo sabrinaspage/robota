@@ -16,6 +16,7 @@ class Company(models.Model):
     email = models.EmailField()
     description = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
+    password = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.name
