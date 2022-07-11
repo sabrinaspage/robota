@@ -14,11 +14,11 @@ class UserSerializer(serializers.ModelSerializer):
         
 class JobUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = JobUser
         fields = ["companyJob", "user", "status"]
 
 class UserSkillSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = UserSkill
         fields = ["user", "name"]
         
