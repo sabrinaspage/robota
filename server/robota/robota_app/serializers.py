@@ -6,6 +6,15 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ["email", "description", "name"]
         
+class CompanyJobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyJob
+        fields = ["company", "description", "name"]
+
+class JobSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobSkill
+        fields = ["companyJob", "name"]
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

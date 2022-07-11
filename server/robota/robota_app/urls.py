@@ -1,6 +1,8 @@
 from django.urls import path, include
 from .views import (
     CompanyApiView,
+    CompanyJobApiView, 
+    JobSkillApiView,
     UserApiView,
     LoginApiView,
     SignUpApiView,
@@ -9,7 +11,7 @@ from .views import (
     AddSkillApiView,
     RemoveSkillApiView,
     UserSkillApiView,
-    JobUserApiView
+    JobUserApiView,
 )
 
 urlpatterns = [
@@ -23,4 +25,7 @@ urlpatterns = [
     path('user/skill', UserSkillApiView.as_view()),
     path('user/skill/add', AddSkillApiView.as_view()),
     path('user/skill/remove', RemoveSkillApiView.as_view()),
+    path('company', CompanyApiView.as_view()),
+    path('company/job', CompanyJobApiView.as_view()),
+    path('company/job/skill', JobSkillApiView.as_view())
 ]
