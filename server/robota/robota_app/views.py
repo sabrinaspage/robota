@@ -62,28 +62,24 @@ class CompanyJobApiView(APIView):
         Create a Company Job
         POST example
         {
-            "email": "excompany@google.com",
+            "company": 1,
             "description" : "Responsible for maintaining the website.",
             "name": "Software Engineer"
         }
         '''
         # check if company exists
-        email = request.data.get('email')
-        company = Company.objects.filter(email = email)
-        if company.exists():
-            data = {
-                "company": company[0].id,
-                "description": request.data.get('description'),
-                "name": request.data.get('name')
-            }
-            serializer = CompanyJobSerializer(data=data)
-            # duplicate job allowed here
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-                # invalid serializer
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error' : 'Company does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        data = {
+            "company": request.data.get('company'),
+            "description": request.data.get('description'),
+            "name": request.data.get('name')
+        }
+        serializer = CompanyJobSerializer(data=data)
+        # duplicate job allowed here
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # invalid serializer
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class JobSkillApiView(APIView):
@@ -104,33 +100,20 @@ class JobSkillApiView(APIView):
         Create a Job skill
         POST example
         {
-            "email": "excompany@google.com",
-            "jobDescription" : "Responsible for maintaining the website.",
-            "jobName" : "Software Engineer",
+            "companyJob": 1,
             "name": "Python"
         }
         '''
-        # check if company exists
-        email = request.data.get('email')
-        company = Company.objects.filter(email = email)
-        if company.exists():
-            jobDescription = request.data.get('jobDescription')
-            jobName = request.data.get('jobName')
-            # check if job exists
-            companyJob = CompanyJob.objects.filter(company = company[0], description = jobDescription, name = jobName)
-            if companyJob.exists():
-                data = {
-                    "companyJob": companyJob[0].id,
-                    "name": request.data.get('name')
-                }
-                serializer = JobSkillSerializer(data=data)
-                if serializer.is_valid():
-                    # check duplicate 
-                    if not JobSkill.objects.filter(companyJob = companyJob[0].id, name = request.data.get('name')).exists():
-                        serializer.save()
-                        return Response(serializer.data, status=status.HTTP_201_CREATED)
-                    return Response({'error' : 'Job skill already exists'}, status=status.HTTP_400_BAD_REQUEST)
-                # invalid serializer
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            return Response({'error' : 'Company job does not exists'}, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error' : 'Company does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        data = {
+            "companyJob": request.data.get('companyJob'),
+            "name": request.data.get('name')
+        }
+        serializer = JobSkillSerializer(data=data)
+        if serializer.is_valid():
+            # check duplicate 
+            if not JobSkill.objects.filter(companyJob = request.data.get('companyJob'), name = request.data.get('name')).exists():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({'error' : 'Job skill already exists'}, status=status.HTTP_400_BAD_REQUEST)
+        # invalid serializer
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
