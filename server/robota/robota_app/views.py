@@ -143,7 +143,7 @@ class RemoveSkillApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
     def post(self, request, *args, **kwargs):
-        UserSkill.objects.filter(user=request.data.get('user'), name=request.data.get('name')).delete()
+        UserSkill.objects.filter(id=user=request.data.get('skill_id')).delete()
         return Response({"result": "User removed skill"}, status=status.HTTP_201_CREATED)
 
 # GET USER SKILL LIST
