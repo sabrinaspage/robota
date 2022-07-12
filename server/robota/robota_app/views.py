@@ -1,3 +1,4 @@
+from hashlib import new
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -353,10 +354,9 @@ class MatchingApiView(APIView):
         job_skills = JobSkill.objects.all().values()
         job_group = {}
         for js in job_skills:
-            if not job_group[js["companyJob_id"]]:
+            if js["companyJob_id"] not in job_group:
                 job_group[js["companyJob_id"]] = []
-            else:
-                job_group[js["companyJob_id"]].append(js["name"])
+            job_group[js["companyJob_id"]].append(js["name"])
         
 
         user_skills = UserSkill.objects.filter(user=request.data.get('user')).values()
@@ -366,5 +366,5 @@ class MatchingApiView(APIView):
         for job_id in job_group: 
             matched = len(set(job_group[job_id]) & set(user_skills_list))
             ranked_job.append({"companyJob_id": job_id, "score": matched})
-        
-        return Response(ranked_job, status=status.HTTP_201_CREATED)
+        newlist = sorted(ranked_job, key=lambda d: d['score'], reverse=True)
+        return Response(newlist, status=status.HTTP_201_CREATED)
