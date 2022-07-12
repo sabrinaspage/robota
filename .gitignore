@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# server
+env
+.env
+# we will use portgresql
+db.sqlite3
+*.pyc
+cloud_sql_proxy
+# only add static when deploying
+static
