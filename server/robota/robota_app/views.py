@@ -337,10 +337,34 @@ class RemoveJobSkillApiView(APIView):
         CompanyJob.objects.filter(id=request.data.get('jobSkill_id')).delete()
         return Response({"result": "Company removed a job skill"}, status=status.HTTP_201_CREATED)
 
-# GET USER JOB LIST
+# GET USER JOBS LIST
 class JobUserApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
     def post(self, request, *args, **kwargs):
         user_job_list = JobUser.objects.filter(user=request.data.get('user')).values()
         return Response(user_job_list, status=status.HTTP_201_CREATED)
+
+# MATCHING USER TO A JOB
+class MatchingApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        job_skills = JobSkill.objects.all().values()
+        job_group = {}
+        for js in job_skills:
+            if not job_group[js["companyJob_id"]]:
+                job_group[js["companyJob_id"]] = []
+            else:
+                job_group[js["companyJob_id"]].append(js["name"])
+        
+
+        user_skills = UserSkill.objects.filter(user=request.data.get('user')).values()
+        user_skills_list = [f['name'] for f in user_skills]
+
+        ranked_job = []
+        for job_id in job_group: 
+            matched = len(set(job_group[job_id]) & set(user_skills_list))
+            ranked_job.append({"companyJob_id": job_id, "score": matched})
+        
+        return Response(ranked_job, status=status.HTTP_201_CREATED)

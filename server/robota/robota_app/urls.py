@@ -19,12 +19,14 @@ from .views import (
     RemoveSkillApiView,
     UserSkillApiView,
     JobUserApiView,
+    MatchingApiView
 )
 
 urlpatterns = [
     path('user/login', LoginApiView.as_view()),
     path('user/signup', SignUpApiView.as_view()),
     path('user/', UserApiView.as_view()),
+    path('user/match', MatchingApiView.as_view()),
     path('user/job', JobUserApiView.as_view()),
     path('user/job/apply', ApplyJobApiView.as_view()),
     path('user/job/unapply', UnapplyJobApiView.as_view()),
@@ -41,4 +43,5 @@ urlpatterns = [
     path('company/job/skill', JobSkillApiView.as_view()),
     path('company/job/skill/add', AddJobSkillApiView.as_view()),
     path('company/job/skill/remove', RemoveJobSkillApiView.as_view()),
+
 ]
