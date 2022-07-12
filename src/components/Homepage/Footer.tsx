@@ -1,4 +1,4 @@
-import RobotaLogo from "../images/Robota.svg";
+import RobotaLogo from "../../images/Robota.svg";
 
 const Footer = () => (
   <div className="container mt-5">

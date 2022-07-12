@@ -58,7 +58,7 @@ const NavLinks = ({ links, buttons }: NavbarProps) => {
 const Navbar = ({ links, buttons }: NavbarProps) => (
   <nav className="navbar navbar-expand-lg bg-light">
     <div className="container-fluid">
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="/">
         <div className="container">
           <img src={RobotaLogo} alt="" width="100" height="100" />
         </div>

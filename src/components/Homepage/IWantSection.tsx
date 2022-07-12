@@ -1,4 +1,4 @@
-import GoIcon from "../images/go.png";
+import GoIcon from "../../images/go.png";
 
 const wants = [
   {
