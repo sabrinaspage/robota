@@ -81,7 +81,7 @@ class CompanyJobApiView(APIView):
     # List all
     def get(self, request, *args, **kwargs):
         '''
-        List all the Job skills
+        List all the Company jobs
         '''
         companyJobs = CompanyJob.objects.all().values()
         return Response(companyJobs, status=status.HTTP_200_OK)
@@ -133,6 +133,28 @@ class RemoveCompanyJobApiView(APIView):
         CompanyJob.objects.filter(id=request.data.get('companyJob_id')).delete()
         return Response({"result": "Company removed a job"}, status=status.HTTP_201_CREATED)
 
+
+class CompanyJobUserApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # List all the users that users applied to companyJob under company
+    def post(self, request, *args, **kwargs):
+        '''
+        POST example
+        {
+            "companyJob_id" : 1
+        }
+        '''
+        companyJob = CompanyJob.objects.get(id = request.data.get('companyJob_id'))
+        jobUsers = companyJob.jobuser_set.all().values()
+        jobUserInfos = []
+        for jobUser in jobUsers:
+            jobUserInfo = User.objects.filter(id = jobUser['user_id']).values()[0]
+            # add status to job user information
+            jobUserInfo['status'] = jobUser['status']
+            jobUserInfos.append(jobUserInfo)
+        return Response(jobUserInfos, status=status.HTTP_200_OK)
 
 # GENERAL USER API
 class UserApiView(APIView):
@@ -254,19 +276,23 @@ class UserSkillApiView(APIView):
         user_skill_list = UserSkill.objects.filter(user=request.data.get('user')).values()
         return Response(user_skill_list, status=status.HTTP_201_CREATED)
 
-# ADD AVAILABLE COMPANY JOB SKILL 
 class JobSkillApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
 
-    # List all Job skills
-    def get(self, request, *args, **kwargs):
+    # List all Job skills for a CompanyJob
+    def post(self, request, *args, **kwargs):
         '''
-        List all the Job skills
+        POST example
+        {
+            "companyJob" : 1
+        }
         '''
-        jobskills = JobSkill.objects.all().values()
-        return Response(jobskills, status=status.HTTP_200_OK)
+        companyJob = CompanyJob.objects.get(id = request.data.get('companyJob'))
+        jobSkills = companyJob.jobskill_set.all().values()
+        return Response(jobSkills, status=status.HTTP_200_OK)
 
+# ADD AVAILABLE COMPANY JOB SKILL 
 class AddJobSkillApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
