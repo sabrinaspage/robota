@@ -20,7 +20,7 @@ class CompanyApiView(APIView):
 
 class CompanySignUpApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # Create a company
     def post(self, request, *args, **kwargs):
@@ -54,7 +54,7 @@ class CompanySignUpApiView(APIView):
 
 class CompanyLoginApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request, *args, **kwargs):
         '''
@@ -157,6 +157,29 @@ class CompanyJobUserApiView(APIView):
             jobUserInfos.append(jobUserInfo)
         return Response(jobUserInfos, status=status.HTTP_200_OK)
 
+
+class CompanyJobStatusUpdateApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # List all the users that users applied to companyJob under company
+    def post(self, request, *args, **kwargs):
+        '''
+        POST example
+        {
+            "jobuser": 1,
+            "status": 1
+        }
+        '''
+        try:
+            jobUser = JobUser.objects.get(id = request.data.get('jobuser'))
+            jobUser.status = request.data.get('status')
+            jobUser.save(update_fields=["status"])
+            return Response(JobUserSerializer(jobUser).data, status=status.HTTP_200_OK) 
+        except:
+            return Response({"error": "Job user does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
+
 # GENERAL USER API
 class UserApiView(APIView):
     # add permission to check if user is authenticated
@@ -173,7 +196,7 @@ class UserApiView(APIView):
 # USER SIGNUP API
 class SignUpApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request, *args, **kwargs):
         # check if the user exists
@@ -201,7 +224,7 @@ class SignUpApiView(APIView):
 # USER LOGIN API
 class LoginApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request, *args, **kwargs):
         # check if the user exists
