@@ -250,4 +250,3 @@ class JobUserApiView(APIView):
     def get(self, request, *args, **kwargs):
         user_job_list = JobUser.objects.filter(user=request.data.get('user')).values()
         return Response(user_job_list, status=status.HTTP_201_CREATED)
-
