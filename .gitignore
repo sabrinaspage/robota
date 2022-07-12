@@ -29,3 +29,5 @@ env
 db.sqlite3
 *.pyc
 cloud_sql_proxy
+# only add static when deploying
+static
