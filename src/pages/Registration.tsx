@@ -44,7 +44,7 @@ const JobSeekerRegistration = () => (
       />
       <RobotaButton
         title="Finish Registering"
-        urlPath="/seeker-success"
+        urlPath="/job-seeker-success"
         type={ButtonTypes.CONTAINED_LARGE}
       />
     </form>
