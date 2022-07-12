@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import FileInput from "../components/FileInput";
 import Input from "../components/Input";
 import Navbar from "../components/Navbar";
 import RobotaButton, { ButtonTypes } from "../components/RobotaButton";
@@ -20,6 +21,7 @@ const JobSeekerRegistration = () => (
         type="text"
       />
       <Input label="Email" placeholder="Enter Email" id="email" type="email" />
+      <FileInput label="Upload Resume" id="resume" />
       <Input
         label="Gender"
         placeholder="Enter gender"
