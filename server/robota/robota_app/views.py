@@ -9,23 +9,28 @@ class CompanyApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
 
-    # 1. List all
+    # List all companies
     def get(self, request, *args, **kwargs):
         '''
         List all the companies
         '''
-        companies = Company.objects.all().values_list()
+        companies = Company.objects.all().values()
         return Response(companies, status=status.HTTP_200_OK)
 
-    # 2. Create
+class CompanySignUpApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Create a company
     def post(self, request, *args, **kwargs):
         '''
         Create a Company
         POST example
         {
-            "email": "excompany@google.com",
+            "email": "excompany33@google.com",
             "description": "Tech",
-            "name": "Google"
+            "name": "Google",
+            "password": "dfafd"
         }
         '''
         # check if company exists through email
@@ -34,7 +39,8 @@ class CompanyApiView(APIView):
             data = {
                 'email': email, 
                 'description': request.data.get('description'), 
-                'name': request.data.get('name')
+                'name': request.data.get('name'),
+                'password': request.data.get('password')
             }
             serializer = CompanySerializer(data=data)
             if serializer.is_valid():
@@ -44,47 +50,111 @@ class CompanyApiView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response({'error' : 'Company already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+class CompanyLoginApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        '''
+        Log in a Company
+        POST example
+        {
+            "email": "excompany33@google.com",
+            "password": "dfafd"
+        }
+        '''
+        # check if the company exists
+        check_company_email = Company.objects.filter(email=request.data.get('email'))
+        if check_company_email:
+            company = check_company_email.values()[0]
+            # check for password
+            if company["password"] == request.data.get('password'):
+                return Response(company, status=status.HTTP_201_CREATED)
+        return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class CompanyJobApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
 
-    # 1. List all
+    # List all
     def get(self, request, *args, **kwargs):
         '''
-        List all the Job skills
+        List all the Company jobs
         '''
-        companyJobs = CompanyJob.objects.all().values_list()
+        companyJobs = CompanyJob.objects.all().values()
         return Response(companyJobs, status=status.HTTP_200_OK)
 
-    # 2. Create
+
+class AddCompanyJobApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Create a company job
     def post(self, request, *args, **kwargs):
         '''
         Create a Company Job
         POST example
         {
-            "email": "excompany@google.com",
+            "company": 1,
             "description" : "Responsible for maintaining the website.",
             "name": "Software Engineer"
         }
         '''
         # check if company exists
-        email = request.data.get('email')
-        company = Company.objects.filter(email = email)
-        if company.exists():
-            data = {
-                "company": company[0].id,
-                "description": request.data.get('description'),
-                "name": request.data.get('name')
-            }
-            serializer = CompanyJobSerializer(data=data)
-            # duplicate job allowed here
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-                # invalid serializer
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error' : 'Company does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        data = {
+            "company": request.data.get('company'),
+            "description": request.data.get('description'),
+            "name": request.data.get('name')
+        }
+        serializer = CompanyJobSerializer(data=data)
+        # duplicate job allowed here
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # invalid serializer
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class RemoveCompanyJobApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Remove a company job
+    def post(self, request, *args, **kwargs):
+        '''
+        Remove a Company Job
+        POST example
+        {
+            "companyJob_id" : 1
+        }
+        '''
+        CompanyJob.objects.filter(id=request.data.get('companyJob_id')).delete()
+        return Response({"result": "Company removed a job"}, status=status.HTTP_201_CREATED)
+
+
+class CompanyJobUserApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # List all the users that users applied to companyJob under company
+    def post(self, request, *args, **kwargs):
+        '''
+        POST example
+        {
+            "companyJob_id" : 1
+        }
+        '''
+        companyJob = CompanyJob.objects.get(id = request.data.get('companyJob_id'))
+        jobUsers = companyJob.jobuser_set.all().values()
+        jobUserInfos = []
+        for jobUser in jobUsers:
+            jobUserInfo = User.objects.filter(id = jobUser['user_id']).values()[0]
+            # add status to job user information
+            jobUserInfo['status'] = jobUser['status']
+            jobUserInfos.append(jobUserInfo)
+        return Response(jobUserInfos, status=status.HTTP_200_OK)
 
 # GENERAL USER API
 class UserApiView(APIView):
@@ -96,7 +166,7 @@ class UserApiView(APIView):
         '''
         List all the users
         '''
-        users = User.objects.all().values_list()
+        users = User.objects.all().values()
         return Response(users, status=status.HTTP_200_OK)
 
 # USER SIGNUP API
@@ -195,31 +265,39 @@ class RemoveSkillApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
     def post(self, request, *args, **kwargs):
-        UserSkill.objects.filter(id=user=request.data.get('skill_id')).delete()
+        UserSkill.objects.filter(id=request.data.get('skill_id')).delete()
         return Response({"result": "User removed skill"}, status=status.HTTP_201_CREATED)
 
 # GET USER SKILL LIST
 class UserSkillApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user_skill_list = UserSkill.objects.filter(user=request.data.get('user')).values()
         return Response(user_skill_list, status=status.HTTP_201_CREATED)
 
-# ADD AVAILABLE COMPANY JOB SKILL 
 class JobSkillApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
 
-    # 1. List all
-    def get(self, request, *args, **kwargs):
+    # List all Job skills for a CompanyJob
+    def post(self, request, *args, **kwargs):
         '''
-        List all the Job skills
+        POST example
+        {
+            "companyJob" : 1
+        }
         '''
-        jobskills = JobSkill.objects.all().values_list()
-        return Response(jobskills, status=status.HTTP_200_OK)
+        companyJob = CompanyJob.objects.get(id = request.data.get('companyJob'))
+        jobSkills = companyJob.jobskill_set.all().values()
+        return Response(jobSkills, status=status.HTTP_200_OK)
 
-    # 2. Create
+# ADD AVAILABLE COMPANY JOB SKILL 
+class AddJobSkillApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Create a Job skill
     def post(self, request, *args, **kwargs):
         '''
         Create a Job skill
@@ -243,10 +321,26 @@ class JobSkillApiView(APIView):
         # invalid serializer
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class RemoveJobSkillApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Remove a company job
+    def post(self, request, *args, **kwargs):
+        '''
+        Remove a Company Job
+        POST example
+        {
+            "jobSkill_id" : 1
+        }
+        '''
+        CompanyJob.objects.filter(id=request.data.get('jobSkill_id')).delete()
+        return Response({"result": "Company removed a job skill"}, status=status.HTTP_201_CREATED)
+
 # GET USER JOB LIST
 class JobUserApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.IsAuthenticated]
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user_job_list = JobUser.objects.filter(user=request.data.get('user')).values()
         return Response(user_job_list, status=status.HTTP_201_CREATED)

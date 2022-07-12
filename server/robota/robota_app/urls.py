@@ -1,8 +1,15 @@
 from django.urls import path, include
 from .views import (
     CompanyApiView,
+    CompanySignUpApiView,
+    CompanyLoginApiView,
     CompanyJobApiView, 
+    CompanyJobUserApiView,
+    AddCompanyJobApiView,
+    RemoveCompanyJobApiView,
     JobSkillApiView,
+    AddJobSkillApiView,
+    RemoveJobSkillApiView,
     UserApiView,
     LoginApiView,
     SignUpApiView,
@@ -15,7 +22,6 @@ from .views import (
 )
 
 urlpatterns = [
-    path('', CompanyApiView.as_view()),
     path('user/login', LoginApiView.as_view()),
     path('user/signup', SignUpApiView.as_view()),
     path('user/', UserApiView.as_view()),
@@ -26,6 +32,13 @@ urlpatterns = [
     path('user/skill/add', AddSkillApiView.as_view()),
     path('user/skill/remove', RemoveSkillApiView.as_view()),
     path('company', CompanyApiView.as_view()),
+    path('company/signup', CompanySignUpApiView.as_view()),
+    path('company/login', CompanyLoginApiView.as_view()),
     path('company/job', CompanyJobApiView.as_view()),
-    path('company/job/skill', JobSkillApiView.as_view())
+    path('company/job/user', CompanyJobUserApiView.as_view()),
+    path('company/job/add', AddCompanyJobApiView.as_view()),
+    path('company/job/remove', RemoveCompanyJobApiView.as_view()),
+    path('company/job/skill', JobSkillApiView.as_view()),
+    path('company/job/skill/add', AddJobSkillApiView.as_view()),
+    path('company/job/skill/remove', RemoveJobSkillApiView.as_view()),
 ]
