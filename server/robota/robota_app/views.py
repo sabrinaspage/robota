@@ -8,7 +8,7 @@ from .serializers import *
 
 class CompanyApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # List all companies
     def get(self, request, *args, **kwargs):
@@ -77,7 +77,7 @@ class CompanyLoginApiView(APIView):
 
 class CompanyJobApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # List all
     def get(self, request, *args, **kwargs):
@@ -90,7 +90,7 @@ class CompanyJobApiView(APIView):
 
 class AddCompanyJobApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # Create a company job
     def post(self, request, *args, **kwargs):
@@ -120,7 +120,7 @@ class AddCompanyJobApiView(APIView):
 
 class RemoveCompanyJobApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # Remove a company job
     def post(self, request, *args, **kwargs):
@@ -137,7 +137,7 @@ class RemoveCompanyJobApiView(APIView):
 
 class CompanyJobUserApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # List all the users that users applied to companyJob under company
     def post(self, request, *args, **kwargs):
@@ -160,7 +160,7 @@ class CompanyJobUserApiView(APIView):
 
 class CompanyJobStatusUpdateApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # List all the users that users applied to companyJob under company
     def post(self, request, *args, **kwargs):
@@ -183,7 +183,7 @@ class CompanyJobStatusUpdateApiView(APIView):
 # GENERAL USER API
 class UserApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # 1. List all
     def get(self, request, *args, **kwargs):
@@ -240,7 +240,7 @@ class LoginApiView(APIView):
 # JOB APPLY
 class ApplyJobApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         check_apply = JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user'))
 
@@ -262,7 +262,7 @@ class ApplyJobApiView(APIView):
 # JOB UNAPPLY
 class UnapplyJobApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         JobUser.objects.filter(companyJob=request.data.get('companyJob'), user=request.data.get('user')).delete()
         return Response({"result": "User unapplied"}, status=status.HTTP_201_CREATED)
@@ -270,7 +270,7 @@ class UnapplyJobApiView(APIView):
 # ADD SKILL
 class AddSkillApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         data = {
             'user': request.data.get('user'),
@@ -287,7 +287,7 @@ class AddSkillApiView(APIView):
 # REMOVE SKILL
 class RemoveSkillApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         UserSkill.objects.filter(id=request.data.get('skill_id')).delete()
         return Response({"result": "User removed skill"}, status=status.HTTP_201_CREATED)
@@ -295,14 +295,14 @@ class RemoveSkillApiView(APIView):
 # GET USER SKILL LIST
 class UserSkillApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         user_skill_list = UserSkill.objects.filter(user=request.data.get('user')).values()
         return Response(user_skill_list, status=status.HTTP_201_CREATED)
 
 class JobSkillApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # List all Job skills for a CompanyJob
     def post(self, request, *args, **kwargs):
@@ -319,7 +319,7 @@ class JobSkillApiView(APIView):
 # ADD AVAILABLE COMPANY JOB SKILL 
 class AddJobSkillApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # Create a Job skill
     def post(self, request, *args, **kwargs):
@@ -347,7 +347,7 @@ class AddJobSkillApiView(APIView):
 
 class RemoveJobSkillApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # Remove a company job
     def post(self, request, *args, **kwargs):
@@ -364,7 +364,7 @@ class RemoveJobSkillApiView(APIView):
 # GET USER JOBS LIST
 class JobUserApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         user_job_list = JobUser.objects.filter(user=request.data.get('user')).values()
         return Response(user_job_list, status=status.HTTP_201_CREATED)
@@ -372,7 +372,7 @@ class JobUserApiView(APIView):
 # MATCHING USER TO A JOB
 class MatchingApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request, *args, **kwargs):
         job_skills = JobSkill.objects.all().values()
         job_group = {}
