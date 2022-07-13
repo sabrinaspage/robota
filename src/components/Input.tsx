@@ -1,12 +1,17 @@
+import { ChangeEvent, useEffect } from "react";
+
 interface InputProps {
   label: string;
   placeholder: string;
   id: string;
   type: string;
   subtitle?: string;
+  value?: string;
+  changeHandler?: (event: any) => void;
 }
 
-const Input = ({ label, placeholder, id, type, subtitle }: InputProps) => (
+const Input = ({ label, placeholder, id, type, subtitle, value = "", changeHandler }: InputProps) => (
+
   <div className="form-group">
     <label>{label}</label>
     <input
@@ -15,6 +20,8 @@ const Input = ({ label, placeholder, id, type, subtitle }: InputProps) => (
       id={id}
       aria-describedby="emailHelp"
       placeholder={placeholder}
+      value={value}
+      onChange={changeHandler}
     />
     {subtitle && (
       <small id="emailHelp" className="form-text text-muted">
