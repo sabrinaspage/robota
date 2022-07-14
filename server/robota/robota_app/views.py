@@ -90,7 +90,15 @@ class CompanyJobApiView(APIView):
         company = Company.objects.filter(id=request.data.get('company'))
         if company.exists():
             companyJobs = company[0].companyjob_set.all().values()
-            return Response(companyJobs, status=status.HTTP_200_OK)
+            res = []
+            for companyJob in companyJobs:
+                jobskills = []
+                companyJobObj = CompanyJob.objects.get(id = companyJob['id'])
+                for jobskill in companyJobObj.jobskill_set.all().values():
+                    jobskills.append(jobskill['name'])
+                companyJob['skills'] = ', '.join(jobskills)
+                res.append(companyJob)
+            return Response(res, status=status.HTTP_200_OK)
         return Response({'error': 'Company does not exist'}, status=status.HTTP_200_OK)
 
 class AddCompanyJobApiView(APIView):
