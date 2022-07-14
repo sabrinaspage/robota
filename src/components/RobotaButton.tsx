@@ -10,7 +10,6 @@ interface SmallButtonProps {
   type: ButtonTypes;
   urlPath: string;
   marginWidth?: string;
-  onClick?: any
 }
 
 const RobotaButton = ({
@@ -18,7 +17,7 @@ const RobotaButton = ({
   type,
   //urlPath,
   marginWidth,
-  onClick
+  onClick,
 }: SmallButtonProps) => {
   if (type == ButtonTypes.OUTLINE_LARGE) {
     return (

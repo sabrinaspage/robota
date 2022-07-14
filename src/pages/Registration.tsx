@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import RobotaButton, { ButtonTypes } from "../components/RobotaButton";
 import { homepageButtons, homepageLinks } from "../consts/constants";
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 
 const JobSeekerRegistration = () => {
   const [regValue, setRegValue] = useState({
@@ -15,8 +15,8 @@ const JobSeekerRegistration = () => {
     gender: "",
     cv: "",
     password: "",
-    password2: ""
-  })
+    password2: "",
+  });
 
   return (
     <div>
@@ -28,7 +28,7 @@ const JobSeekerRegistration = () => {
           type="text"
           value={regValue.fname}
           changeHandler={(event) => {
-            setRegValue((prev) => ({...prev, fname: event.target.value}))
+            setRegValue((prev) => ({ ...prev, fname: event.target.value }));
           }}
         />
         <Input
@@ -38,17 +38,17 @@ const JobSeekerRegistration = () => {
           type="text"
           value={regValue.lname}
           changeHandler={(event) => {
-            setRegValue((prev) => ({...prev, lname: event.target.value}))
+            setRegValue((prev) => ({ ...prev, lname: event.target.value }));
           }}
         />
-        <Input 
-          label="Email" 
-          placeholder="Enter Email" 
-          id="email" 
-          type="email"    
+        <Input
+          label="Email"
+          placeholder="Enter Email"
+          id="email"
+          type="email"
           value={regValue.email}
           changeHandler={(event) => {
-            setRegValue((prev) => ({...prev, email: event.target.value}))
+            setRegValue((prev) => ({ ...prev, email: event.target.value }));
           }}
         />
         <FileInput label="Upload Resume" id="resume" />
@@ -59,7 +59,7 @@ const JobSeekerRegistration = () => {
           type="text"
           value={regValue.gender}
           changeHandler={(event) => {
-            setRegValue((prev) => ({...prev, gender: event.target.value}))
+            setRegValue((prev) => ({ ...prev, gender: event.target.value }));
           }}
         />
         <Input
@@ -70,7 +70,7 @@ const JobSeekerRegistration = () => {
           subtitle=""
           value={regValue.password}
           changeHandler={(event) => {
-            setRegValue((prev) => ({...prev, password: event.target.value}))
+            setRegValue((prev) => ({ ...prev, password: event.target.value }));
           }}
         />
         <Input
@@ -81,7 +81,7 @@ const JobSeekerRegistration = () => {
           subtitle=""
           value={regValue.password2}
           changeHandler={(event) => {
-            setRegValue((prev) => ({...prev, password2: event.target.value}))
+            setRegValue((prev) => ({ ...prev, password2: event.target.value }));
           }}
         />
         <RobotaButton
@@ -89,92 +89,101 @@ const JobSeekerRegistration = () => {
           urlPath="/job-seeker-success"
           type={ButtonTypes.CONTAINED_LARGE}
           onClick={async () => {
-            const res = await axios.post("https://robota-355717.uw.r.appspot.com/user/signup", regValue);
+            const res = await axios.post(
+              "https://robota-355717.uw.r.appspot.com/user/signup",
+              regValue
+            );
             console.log(res.data);
-            window.location.href = "/job-seeker-success"
+            window.location.href = "/job-seeker-success";
           }}
         />
       </form>
     </div>
-  )
+  );
 };
 
-const CompanyRegistration = () => { 
+const CompanyRegistration = () => {
   const [regValue, setRegValue] = useState({
     name: "",
     email: "",
     description: "",
     password: "",
-    password2: ""
-  })
+    password2: "",
+  });
 
   return (
-      <div>
-        <form>
-          <Input
-            label="Company Name"
-            placeholder="Enter Company Name"
-            id="name"
-            type="text"
-            value={regValue.name}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({...prev, name: event.target.value}))
-            }}
-          />
-          <Input
-            label="Company Email"
-            placeholder="Enter Company Email"
-            id="email"
-            type="email"
-            value={regValue.email}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({...prev, email: event.target.value}))
-            }}
-          />
-          <Input
-            label="Company Description"
-            placeholder="Enter Company Description"
-            id="description"
-            type="description"
-            value={regValue.description}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({...prev, description: event.target.value}))
-            }}
-          />
-          <Input
-            label="Password"
-            placeholder="Enter Password"
-            id="password"
-            type="password"
-            value={regValue.password}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({...prev, password: event.target.value}))
-            }}
-          />
-          <Input
-            label="Reenter Password"
-            placeholder="Reenter Password"
-            id="password2"
-            type="password"
-            subtitle=""
-            value={regValue.password2}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({...prev, password2: event.target.value}))
-            }}
-          />
-          <RobotaButton
-            title="Finish Registering"
-            urlPath="/company-success"
-            type={ButtonTypes.CONTAINED_LARGE}
-            onClick={async () => {
-              const res = await axios.post("https://robota-355717.uw.r.appspot.com/company/signup", regValue);
-              console.log(res.data);
-              window.location.href = "/company-success"
-            }}
-          />
-        </form>
-      </div>
-    )
+    <div>
+      <form>
+        <Input
+          label="Company Name"
+          placeholder="Enter Company Name"
+          id="name"
+          type="text"
+          value={regValue.name}
+          changeHandler={(event) => {
+            setRegValue((prev) => ({ ...prev, name: event.target.value }));
+          }}
+        />
+        <Input
+          label="Company Email"
+          placeholder="Enter Company Email"
+          id="email"
+          type="email"
+          value={regValue.email}
+          changeHandler={(event) => {
+            setRegValue((prev) => ({ ...prev, email: event.target.value }));
+          }}
+        />
+        <Input
+          label="Company Description"
+          placeholder="Enter Company Description"
+          id="description"
+          type="description"
+          value={regValue.description}
+          changeHandler={(event) => {
+            setRegValue((prev) => ({
+              ...prev,
+              description: event.target.value,
+            }));
+          }}
+        />
+        <Input
+          label="Password"
+          placeholder="Enter Password"
+          id="password"
+          type="password"
+          value={regValue.password}
+          changeHandler={(event) => {
+            setRegValue((prev) => ({ ...prev, password: event.target.value }));
+          }}
+        />
+        <Input
+          label="Reenter Password"
+          placeholder="Reenter Password"
+          id="password2"
+          type="password"
+          subtitle=""
+          value={regValue.password2}
+          changeHandler={(event) => {
+            setRegValue((prev) => ({ ...prev, password2: event.target.value }));
+          }}
+        />
+        <RobotaButton
+          title="Finish Registering"
+          urlPath="/company-success"
+          type={ButtonTypes.CONTAINED_LARGE}
+          onClick={async () => {
+            const res = await axios.post(
+              "https://robota-355717.uw.r.appspot.com/company/signup",
+              regValue
+            );
+            console.log(res.data);
+            window.location.href = "/company-success";
+          }}
+        />
+      </form>
+    </div>
+  );
 };
 
 function Registration() {
