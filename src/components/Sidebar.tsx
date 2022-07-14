@@ -24,6 +24,7 @@ const SidebarItem = ({ title, active, imgUrl }: SidebarItemProps) => {
         height: 50,
         paddingTop: 15,
         paddingLeft: 10,
+        cursor: "pointer",
       }}
     >
       <img src={imgUrl} alt="" width="20" height="relative" />
