@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import JobCard from "../components/JobCard";
 import RobotaButton, { ButtonTypes } from "../components/RobotaButton";
 import Sidebar from "../components/Sidebar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface JobsProps {
   id: string;
@@ -9,7 +11,35 @@ interface JobsProps {
 }
 
 const CompanyListings = ({ id, currentUserType }: JobsProps) => {
+  // TODO
+  // const [companyId, setCompanyId] = useState('')
   // call api here to get company's jobs postings
+  const [jobValue, setJobValue] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const companyId = localStorage.getItem('companyId');
+  //   if (companyId) {
+  //     setCompanyId(companyId);
+  //   }
+  // }, [companyId]);
+
+  useEffect(() => {
+
+    const companyId = localStorage.getItem('companyId');
+    console.log(companyId);
+
+    axios.get("https://robota-355717.uw.r.appspot.com/company/job").then(response => {
+      setJobValue(response.data);
+      setLoading(false);
+      console.log(response.data);
+    });
+  }, []);
+
+  if (isLoading) {
+    return <div className="App">Loading...</div>;
+  }
+
   return (
     <div className="d-flex flex-row" style={{ minHeight: "100%" }}>
       <Sidebar currentUserType={currentUserType} />

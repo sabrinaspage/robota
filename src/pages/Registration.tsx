@@ -178,6 +178,7 @@ const CompanyRegistration = () => {
               regValue
             );
             console.log(res.data);
+            localStorage["companyId"] = res.data.id
             window.location.href = "/company-success";
           }}
         />
