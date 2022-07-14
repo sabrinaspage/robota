@@ -29,6 +29,7 @@ class CompanyJob(models.Model):
     )
     description = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
+    location = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return '{} - {}'.format(self.company, self.name)
