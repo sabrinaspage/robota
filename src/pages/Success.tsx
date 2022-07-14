@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { homepageButtons, homepageLinks } from "../consts/constants";
 import CompanySuccessImg from "../images/company-success.png";
 import SeekerSuccessImg from "../images/seeker-success.png";
-import RobotaLogo from "../images/Robota.svg";
 
 const CompanySuccess = () => (
   <div style={{ backgroundColor: "#D0FCFF" }}>
@@ -88,7 +87,7 @@ const JobSeekerSuccess = () => (
   </div>
 );
 
-function Registration() {
+function Success() {
   const currentPath = useLocation().pathname;
 
   return (
@@ -100,4 +99,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default Success;
