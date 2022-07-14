@@ -79,14 +79,16 @@ class CompanyJobApiView(APIView):
     # add permission to check if user is authenticated
     permission_classes = [permissions.AllowAny]
 
-    # List all
-    def get(self, request, *args, **kwargs):
+    # Get jobs posted by company id 
+    def post(self, request, *args, **kwargs):
         '''
-        List all the Company jobs
+        POST example
+        {
+            "company": 1
+        }
         '''
-        companyJobs = CompanyJob.objects.all().values()
+        companyJobs = CompanyJob.objects.filter(id=request.data.get('company')).values()
         return Response(companyJobs, status=status.HTTP_200_OK)
-
 
 class AddCompanyJobApiView(APIView):
     # add permission to check if user is authenticated
