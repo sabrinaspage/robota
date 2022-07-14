@@ -10,6 +10,7 @@ interface SmallButtonProps {
   type: ButtonTypes;
   urlPath: string;
   marginWidth?: string;
+  onClick?: any;
 }
 
 const RobotaButton = ({
