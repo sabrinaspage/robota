@@ -16,7 +16,8 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
     company_id: "",
     description: "",
     name: "",
-    location: ""
+    location: "",
+    skills: ""
   }]);
   const [isLoading, setLoading] = useState(true);
 
@@ -29,6 +30,7 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
       console.log(response.data);
     });
   }, []);
+
   if (isLoading) {
     return <div className="App">Loading...</div>;
   }
@@ -54,7 +56,7 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
                 title={job.name}
                 description={job.description}
                 location={job.location}
-                skills={job.description}
+                skills={job.skills}
                 link="" // does not have link
                 handleClick={() => null}
               />
