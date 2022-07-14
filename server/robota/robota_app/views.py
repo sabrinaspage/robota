@@ -87,8 +87,11 @@ class CompanyJobApiView(APIView):
             "company": 1
         }
         '''
-        companyJobs = CompanyJob.objects.filter(id=request.data.get('company')).values()
-        return Response(companyJobs, status=status.HTTP_200_OK)
+        company = Company.objects.filter(id=request.data.get('company'))
+        if company.exists():
+            companyJobs = company[0].companyjob_set.all().values()
+            return Response(companyJobs, status=status.HTTP_200_OK)
+        return Response({'error': 'Company does not exist'}, status=status.HTTP_200_OK)
 
 class AddCompanyJobApiView(APIView):
     # add permission to check if user is authenticated
