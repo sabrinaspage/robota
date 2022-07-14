@@ -12,23 +12,13 @@ interface JobsProps {
 
 const CompanyListings = ({ id, currentUserType }: JobsProps) => {
   // TODO
-  // const [companyId, setCompanyId] = useState('')
   // call api here to get company's jobs postings
   const [jobValue, setJobValue] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const companyId = localStorage.getItem('companyId');
-  //   if (companyId) {
-  //     setCompanyId(companyId);
-  //   }
-  // }, [companyId]);
-
   useEffect(() => {
-
     const companyId = localStorage.getItem('companyId');
     console.log(companyId);
-
     axios.get("https://robota-355717.uw.r.appspot.com/company/job").then(response => {
       setJobValue(response.data);
       setLoading(false);
