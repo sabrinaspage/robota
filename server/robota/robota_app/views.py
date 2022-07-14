@@ -100,14 +100,16 @@ class AddCompanyJobApiView(APIView):
         {
             "company": 1,
             "description" : "Responsible for maintaining the website.",
-            "name": "Software Engineer"
+            "name": "Software Engineer",
+            "location": Austin, Texas
         }
         '''
         # check if company exists
         data = {
             "company": request.data.get('company'),
             "description": request.data.get('description'),
-            "name": request.data.get('name')
+            "name": request.data.get('name'),
+            "location": request.data.get('location')
         }
         serializer = CompanyJobSerializer(data=data)
         # duplicate job allowed here

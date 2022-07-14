@@ -9,7 +9,7 @@ class CompanySerializer(serializers.ModelSerializer):
 class CompanyJobSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyJob
-        fields = ["company", "description", "name"]
+        fields = ["company", "description", "name", "location"]
 
 class JobSkillSerializer(serializers.ModelSerializer):
     class Meta:
