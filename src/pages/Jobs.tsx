@@ -19,7 +19,7 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
   useEffect(() => {
     const companyId = localStorage.getItem('companyId');
     console.log(companyId);
-    axios.get("https://robota-355717.uw.r.appspot.com/company/job").then(response => {
+    axios.post("https://robota-355717.uw.r.appspot.com/company/job", {"company": companyId}).then(response => {
       setJobValue(response.data);
       setLoading(false);
       console.log(response.data);
