@@ -38,7 +38,7 @@ const Sidebar = ({ currentUserType }: SidebarProps) => {
     return (
       <div
         className="p-2 bd-highlight d-flex flex-column align-items-center"
-        style={{ backgroundColor: "white", width: 400 }}
+        style={{ backgroundColor: "white", width: 350 }}
       >
         <a href="/">
           <img src={RobotaLogo} alt="" width="100" height="relative" />
@@ -54,7 +54,7 @@ const Sidebar = ({ currentUserType }: SidebarProps) => {
   return (
     <div
       className="p-2 bd-highlight d-flex flex-column align-items-center"
-      style={{ backgroundColor: "white", width: 400 }}
+      style={{ backgroundColor: "white", width: 350 }}
     >
       <a href="/">
         <img src={RobotaLogo} alt="" width="100" height="relative" />

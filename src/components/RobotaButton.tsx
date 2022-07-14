@@ -9,7 +9,7 @@ interface SmallButtonProps {
   title: string;
   type: ButtonTypes;
   urlPath: string;
-  marginWidth?: string;
+  marginWidth?: any;
   onClick?: any;
 }
 
@@ -37,7 +37,8 @@ const RobotaButton = ({
       <button
         role="button"
         type="button"
-        className={`btn btn-primary btn-border-radius-sm btn-box-shadow ${marginWidth} text-white fw-bold`}
+        style={{ width: marginWidth }}
+        className={`btn btn-primary btn-border-radius-sm btn-box-shadow text-white fw-bold`}
         onClick={onClick}
       >
         {title}
