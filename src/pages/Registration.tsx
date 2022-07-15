@@ -18,6 +18,7 @@ const JobSeekerRegistration = () => {
     password2: "",
   });
 
+  const [cv, setCV] = useState(null);
   return (
     <div>
       <form>
@@ -51,7 +52,7 @@ const JobSeekerRegistration = () => {
             setRegValue((prev) => ({ ...prev, email: event.target.value }));
           }}
         />
-        <FileInput label="Upload Resume" id="resume" />
+        <FileInput label="Upload Resume" id="resume" value = {cv} onChange={(e) => setCV(e.target.value)}/>
         <Input
           label="Gender"
           placeholder="Enter gender"
@@ -88,14 +89,14 @@ const JobSeekerRegistration = () => {
           title="Finish Registering"
           urlPath="/job-seeker-success"
           type={ButtonTypes.CONTAINED_LARGE}
-          onClick={async () => {
+          onClick={async () => {            
             const res = await axios.post(
               "https://robota-355717.uw.r.appspot.com/user/signup",
               regValue
             );
             console.log(res.data);
             localStorage["userId"] = res.data.id
-            window.location.href = "/job-seeker-success";
+            // window.location.href = "/job-seeker-success";
           }}
         />
       </form>

@@ -1,6 +1,10 @@
+import { useState } from "react";
+
 interface FileInputProps {
   label: string;
   id: string;
+  value: null;
+  onChange: (event: any) => void;
 }
 
 const FileInput = ({ label, id }: FileInputProps) => {
