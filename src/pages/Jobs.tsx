@@ -90,7 +90,7 @@ const JobSeekerMatches = ({ id, currentUserType }: JobsProps) => {
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     console.log(userId);
-    axios.post("https://robota-355717.uw.r.appspot.com/user/match", {"user": 1}).then(response => {
+    axios.post("https://robota-355717.uw.r.appspot.com/user/match", {"user": userId}).then(response => {
       setJobValue(response.data);
       setLoading(false);
       console.log(response.data);
