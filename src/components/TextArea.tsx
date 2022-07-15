@@ -1,28 +1,23 @@
-import { ChangeEvent, useEffect } from "react";
-
-interface InputProps {
+interface TextAreaProps {
   label: string;
   placeholder: string;
   id: string;
-  type: string;
   subtitle?: string;
   value?: string;
   changeHandler?: (event: any) => void;
 }
 
-const Input = ({
+const TextArea = ({
   label,
   placeholder,
   id,
-  type,
   subtitle,
   value = "",
   changeHandler,
-}: InputProps) => (
+}: TextAreaProps) => (
   <div className="form-group">
     <label>{label}</label>
-    <input
-      type={type}
+    <textarea
       className="form-control"
       id={id}
       aria-describedby="emailHelp"
@@ -38,4 +33,4 @@ const Input = ({
   </div>
 );
 
-export default Input;
+export default TextArea;

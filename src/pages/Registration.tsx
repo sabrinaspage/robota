@@ -6,6 +6,7 @@ import RobotaButton, { ButtonTypes } from "../components/RobotaButton";
 import { homepageButtons, homepageLinks } from "../consts/constants";
 import { useState } from "react";
 import axios from "axios";
+import TextArea from "../components/TextArea";
 
 const JobSeekerRegistration = () => {
   const [regValue, setRegValue] = useState({
@@ -94,7 +95,7 @@ const JobSeekerRegistration = () => {
               regValue
             );
             console.log(res.data);
-            localStorage["userId"] = res.data.id
+            localStorage["userId"] = res.data.id;
             window.location.href = "/job-seeker-success";
           }}
         />
@@ -113,77 +114,96 @@ const CompanyRegistration = () => {
   });
 
   return (
-    <div>
-      <form>
-        <Input
-          label="Company Name"
-          placeholder="Enter Company Name"
-          id="name"
-          type="text"
-          value={regValue.name}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, name: event.target.value }));
-          }}
-        />
-        <Input
-          label="Company Email"
-          placeholder="Enter Company Email"
-          id="email"
-          type="email"
-          value={regValue.email}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, email: event.target.value }));
-          }}
-        />
-        <Input
-          label="Company Description"
-          placeholder="Enter Company Description"
-          id="description"
-          type="description"
-          value={regValue.description}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({
-              ...prev,
-              description: event.target.value,
-            }));
-          }}
-        />
-        <Input
-          label="Password"
-          placeholder="Enter Password"
-          id="password"
-          type="password"
-          value={regValue.password}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, password: event.target.value }));
-          }}
-        />
-        <Input
-          label="Reenter Password"
-          placeholder="Reenter Password"
-          id="password2"
-          type="password"
-          subtitle=""
-          value={regValue.password2}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, password2: event.target.value }));
-          }}
-        />
-        <RobotaButton
-          title="Finish Registering"
-          urlPath="/company-success"
-          type={ButtonTypes.CONTAINED_LARGE}
-          onClick={async () => {
-            const res = await axios.post(
-              "https://robota-355717.uw.r.appspot.com/company/signup",
-              regValue
-            );
-            console.log(res.data);
-            localStorage["companyId"] = res.data.id
-            window.location.href = "/company-success";
-          }}
-        />
-      </form>
+    <div className="d-flex justify-content-center pt-3">
+      <div
+        className="justify-content-center border border-circle px-5 py-3"
+        style={{ width: 500, backgroundColor: "#EBFDFC" }}
+      >
+        <form>
+          <h2 className="d-flex justify-content-center pb-4">
+            Basic Information
+          </h2>
+          <Input
+            label="Company Name"
+            placeholder="Enter Company Name"
+            id="name"
+            type="text"
+            value={regValue.name}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, name: event.target.value }));
+            }}
+          />
+          <p />
+          <Input
+            label="Company Email"
+            placeholder="Enter Company Email"
+            id="email"
+            type="email"
+            value={regValue.email}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, email: event.target.value }));
+            }}
+          />
+          <p />
+          <TextArea
+            label="Company Description"
+            placeholder="Enter Company Description"
+            id="description"
+            value={regValue.description}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({
+                ...prev,
+                description: event.target.value,
+              }));
+            }}
+          />
+          <p />
+          <Input
+            label="Password"
+            placeholder="Enter Password"
+            id="password"
+            type="password"
+            subtitle="Your password should be between 4 and 12 characters"
+            value={regValue.password}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({
+                ...prev,
+                password: event.target.value,
+              }));
+            }}
+          />
+          <p />
+          <Input
+            label="Reenter Password"
+            placeholder="Reenter Password"
+            id="password2"
+            type="password"
+            subtitle=""
+            value={regValue.password2}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({
+                ...prev,
+                password2: event.target.value,
+              }));
+            }}
+          />
+          <p />
+          <RobotaButton
+            title="Finish Registering"
+            urlPath="/company-success"
+            type={ButtonTypes.CONTAINED_LARGE}
+            onClick={async () => {
+              const res = await axios.post(
+                "https://robota-355717.uw.r.appspot.com/company/signup",
+                regValue
+              );
+              console.log(res.data);
+              localStorage["companyId"] = res.data.id;
+              window.location.href = "/company-success";
+            }}
+          />
+        </form>
+      </div>
     </div>
   );
 };
@@ -192,7 +212,7 @@ function Registration() {
   const currentPath = useLocation().pathname;
 
   return (
-    <div className="App">
+    <div>
       <Navbar links={homepageLinks} buttons={homepageButtons} />
       {currentPath === "/company-registration" && <CompanyRegistration />}
       {currentPath === "/job-seeker-registration" && <JobSeekerRegistration />}
