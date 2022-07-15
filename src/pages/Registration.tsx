@@ -20,86 +20,105 @@ const JobSeekerRegistration = () => {
   });
 
   return (
-    <div>
-      <form>
-        <Input
-          label="First Name"
-          placeholder="Enter First Name"
-          id="firstname"
-          type="text"
-          value={regValue.fname}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, fname: event.target.value }));
-          }}
-        />
-        <Input
-          label="Last Name"
-          placeholder="Enter Last Name"
-          id="lastname"
-          type="text"
-          value={regValue.lname}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, lname: event.target.value }));
-          }}
-        />
-        <Input
-          label="Email"
-          placeholder="Enter Email"
-          id="email"
-          type="email"
-          value={regValue.email}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, email: event.target.value }));
-          }}
-        />
-        <FileInput label="Upload Resume" id="resume" />
-        <Input
-          label="Gender"
-          placeholder="Enter gender"
-          id="gender"
-          type="text"
-          value={regValue.gender}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, gender: event.target.value }));
-          }}
-        />
-        <Input
-          label="Password"
-          placeholder="Enter password"
-          id="password"
-          type="password"
-          subtitle=""
-          value={regValue.password}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, password: event.target.value }));
-          }}
-        />
-        <Input
-          label="Reenter Password"
-          placeholder="Reenter password"
-          id="password2"
-          type="password"
-          subtitle=""
-          value={regValue.password2}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, password2: event.target.value }));
-          }}
-        />
-        <RobotaButton
-          title="Finish Registering"
-          urlPath="/job-seeker-success"
-          type={ButtonTypes.CONTAINED_LARGE}
-          onClick={async () => {
-            const res = await axios.post(
-              "https://robota-355717.uw.r.appspot.com/user/signup",
-              regValue
-            );
-            console.log(res.data);
-            localStorage["userId"] = res.data.id;
-            window.location.href = "/job-seeker-success";
-          }}
-        />
-      </form>
+    <div className="d-flex justify-content-center pt-3">
+      <div
+        className="justify-content-center border border-circle px-5 py-3"
+        style={{ width: 500, backgroundColor: "#EBFDFC" }}
+      >
+        <form>
+          <h2 className="d-flex justify-content-center pb-4">
+            Basic Information
+          </h2>
+          <Input
+            label="First Name"
+            placeholder="Enter First Name"
+            id="firstname"
+            type="text"
+            value={regValue.fname}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, fname: event.target.value }));
+            }}
+          />
+          <p />
+          <Input
+            label="Last Name"
+            placeholder="Enter Last Name"
+            id="lastname"
+            type="text"
+            value={regValue.lname}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, lname: event.target.value }));
+            }}
+          />
+          <p />
+          <Input
+            label="Email"
+            placeholder="Enter Email"
+            id="email"
+            type="email"
+            value={regValue.email}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, email: event.target.value }));
+            }}
+          />
+          <p />
+          <FileInput label="Upload Resume" id="resume" />
+          <Input
+            label="Gender"
+            placeholder="Enter gender"
+            id="gender"
+            type="text"
+            value={regValue.gender}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, gender: event.target.value }));
+            }}
+          />
+          <p />
+          <Input
+            label="Password"
+            placeholder="Enter password"
+            id="password"
+            type="password"
+            subtitle="Your password should be between 4 and 12 characters"
+            value={regValue.password}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({
+                ...prev,
+                password: event.target.value,
+              }));
+            }}
+          />
+          <p />
+          <Input
+            label="Reenter Password"
+            placeholder="Reenter password"
+            id="password2"
+            type="password"
+            value={regValue.password2}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({
+                ...prev,
+                password2: event.target.value,
+              }));
+            }}
+          />
+          <p />
+          <RobotaButton
+            title="Finish Registering"
+            urlPath="/job-seeker-success"
+            type={ButtonTypes.CONTAINED_LARGE}
+            onClick={async () => {
+              const res = await axios.post(
+                "https://robota-355717.uw.r.appspot.com/user/signup",
+                regValue
+              );
+              console.log(res.data);
+              localStorage["userId"] = res.data.id;
+              window.location.href = "/job-seeker-success";
+            }}
+          />
+        </form>
+      </div>
     </div>
   );
 };
