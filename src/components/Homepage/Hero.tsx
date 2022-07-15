@@ -1,16 +1,13 @@
 import { useState } from "react";
 import Select from "./Select";
-import HeroicImage from "../images/hero-image.png";
-
-const Headline = () => <div></div>;
-
-const SubHeadline = () => <div></div>;
-
-const Image = () => <div></div>;
+import HeroicImage from "../../images/hero-image.png";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const defaultSelectString = "I want to find talent";
-  const [selectedText, setSelectedText] = useState(defaultSelectString);
+  const [selectedText, setSelectedText] = useState("0");
+  console.log(selectedText);
 
   return (
     <div style={{ backgroundColor: "#D0FCFF" }}>
@@ -34,7 +31,15 @@ const Hero = () => {
               <button
                 type="button"
                 className="btn btn-primary btn-lg px-4"
-                onClick={() => console.log(selectedText)}
+                onClick={() => {
+                  if (selectedText === "0") {
+                    console.log("hi");
+                    navigate("/company-registration", { replace: true });
+                  } else if (selectedText === "1") {
+                    console.log("working?");
+                    navigate("/job-seeker-registration", { replace: true });
+                  }
+                }}
               >
                 Get Started
               </button>

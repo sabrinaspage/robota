@@ -1,4 +1,4 @@
-import GoIcon from "../images/go.png";
+import GoIcon from "../../images/go.png";
 
 const wants = [
   {
@@ -7,7 +7,7 @@ const wants = [
     bgColor: "#F8FD14",
     textColor: "black",
     about: "Get access to vetted individuals seeking on-sire or remote jobs",
-    go: "#",
+    go: "/company-registration",
   },
   {
     who: "Clients",
@@ -15,7 +15,7 @@ const wants = [
     bgColor: "#0F66CD",
     textColor: "white",
     about: "Figure out how Robota can help you land a job",
-    go: "#",
+    go: "/job-seeker-registration",
   },
 ];
 

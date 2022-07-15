@@ -1,6 +1,6 @@
-import LookingAtCharts from "../images/candidate-logos/looking-at-chart.png";
-import HoldingHands from "../images/candidate-logos/shaking-hands.png";
-import WritingOnPaper from "../images/candidate-logos/writing-on-paper.png";
+import LookingAtCharts from "../../images/candidate-logos/looking-at-chart.png";
+import HoldingHands from "../../images/candidate-logos/shaking-hands.png";
+import WritingOnPaper from "../../images/candidate-logos/writing-on-paper.png";
 
 const textAndImage = [
   {

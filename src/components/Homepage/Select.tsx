@@ -9,12 +9,10 @@ const Select = ({ defaultText, setSelectedText }: SelectProps) => {
   return (
     <select
       className="form-select"
-      aria-label="Default select example"
-      onClick={(e) => setSelectedText(e.currentTarget)}
+      onChange={(e) => setSelectedText(e.target.value)}
     >
-      <option defaultValue={defaultText}>I want to find talent</option>
-      <option value="1">I want to provide my skills</option>
-      <option value="2">I want to provide opportunities</option>
+      <option value="0">I want to find talent</option>
+      <option value="1">I want to start my life anew</option>
     </select>
   );
 };

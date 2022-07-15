@@ -1,3 +1,20 @@
+# Installation
+
+This is an instruction for server side installation.
+
+Create Python virtual environment
+  ```sh
+python3 -m venv env
+  ```
+Activate the virtual environment env
+  ```sh
+  source env/bin/activate
+  ```
+Install python packages
+   ```sh
+   pip3 install -r requirements.txt
+   ```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
