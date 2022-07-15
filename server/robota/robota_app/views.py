@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
+from django.forms.models import model_to_dict
 from .models import *
 from .serializers import *
 
@@ -405,4 +406,16 @@ class MatchingApiView(APIView):
             matched = len(set(job_group[job_id]) & set(user_skills_list))
             ranked_job.append({"companyJob_id": job_id, "score": matched})
         newlist = sorted(ranked_job, key=lambda d: d['score'], reverse=True)
-        return Response(newlist, status=status.HTTP_201_CREATED)
+
+        # filter out score 0
+        result = []
+        for job in newlist:
+            if job['score'] > 0:
+                companyJobObj = CompanyJob.objects.get(id = job['companyJob_id'])
+                companyJobDict = model_to_dict(companyJobObj) 
+                jobskills = []
+                for jobskill in companyJobObj.jobskill_set.all().values():
+                    jobskills.append(jobskill['name'])
+                companyJobDict['skills'] = ', '.join(jobskills)
+                result.append(companyJobDict)
+        return Response(result, status=status.HTTP_201_CREATED)

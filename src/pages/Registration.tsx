@@ -94,6 +94,7 @@ const JobSeekerRegistration = () => {
               regValue
             );
             console.log(res.data);
+            localStorage["userId"] = res.data.id
             window.location.href = "/job-seeker-success";
           }}
         />
