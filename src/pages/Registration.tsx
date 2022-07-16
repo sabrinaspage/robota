@@ -89,7 +89,7 @@ const JobSeekerRegistration = () => {
           urlPath="/job-seeker-success"
           type={ButtonTypes.CONTAINED_LARGE}
           onClick={async () => {
-            const url = 'http://127.0.0.1:8000/upload/';
+            const url = 'https://robota-355717.uw.r.appspot.com/upload/';
             const formData = new FormData();
             formData.append('file', resume);
             const config = {
@@ -107,7 +107,7 @@ const JobSeekerRegistration = () => {
             );
             console.log(res.data);
             localStorage["userId"] = res.data.id
-            // window.location.href = "/job-seeker-success";
+            window.location.href = "/job-seeker-success";
           }}
         />
       </form>
