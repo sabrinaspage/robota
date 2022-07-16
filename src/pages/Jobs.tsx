@@ -6,11 +6,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface JobsProps {
-  id: string;
   currentUserType: string;
 }
 
-const CompanyListings = ({ id, currentUserType }: JobsProps) => {
+const CompanyListings = ({ currentUserType }: JobsProps) => {
   const [jobValue, setJobValue] = useState([
     {
       id: "",
@@ -77,7 +76,7 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
   );
 };
 
-const JobSeekerMatches = ({ id, currentUserType }: JobsProps) => {
+const JobSeekerMatches = ({ currentUserType }: JobsProps) => {
   // call api here to get job seeker's matches
   const [jobValue, setJobValue] = useState([
     {
@@ -141,7 +140,6 @@ const JobSeekerMatches = ({ id, currentUserType }: JobsProps) => {
 
 function Jobs() {
   // call api for type of user and user id
-  const currentUserId = "";
   const currentPath = useLocation().pathname;
 
   return (
@@ -154,10 +152,10 @@ function Jobs() {
       }}
     >
       {currentPath === "/company-listings" && (
-        <CompanyListings id={currentUserId} currentUserType="company" />
+        <CompanyListings currentUserType="company" />
       )}
       {currentPath === "/user-matches" && (
-        <JobSeekerMatches id={currentUserId} currentUserType="seeker" />
+        <JobSeekerMatches currentUserType="seeker" />
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Profiler } from "react";
 import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Jobs from "./pages/Jobs";
@@ -6,6 +6,7 @@ import Registration from "./pages/Registration";
 import Success from "./pages/Success";
 import ItsAMatch from "./pages/ItsAMatch";
 import AddListing from "./pages/AddListing";
+import Profile from "./pages/Profile";
 
 function RobotaRouter() {
   return (
@@ -19,6 +20,7 @@ function RobotaRouter() {
       <Route path="/user-matches" element={<Jobs />} />
       <Route path="/its-a-match" element={<ItsAMatch />} />
       <Route path="/add-listing" element={<AddListing />} />
+      <Route path="/seeker-profile" element={<Profile />} />
     </Routes>
   );
 }
