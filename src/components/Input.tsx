@@ -6,7 +6,7 @@ interface InputProps {
   id: string;
   type: string;
   subtitle?: string;
-  value?: string;
+  value?: string | number;
   changeHandler?: (event: any) => void;
 }
 

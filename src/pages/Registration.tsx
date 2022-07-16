@@ -16,8 +16,9 @@ const JobSeekerRegistration = () => {
     gender: "",
     cv: "",
     password: "",
-    password2: "",
   });
+  const [pw2Value, setPw2value] = useState("");
+  const [resume, setResume] = useState("");
 
   return (
     <div className="d-flex justify-content-center pt-3">
@@ -62,7 +63,7 @@ const JobSeekerRegistration = () => {
             }}
           />
           <p />
-          <FileInput label="Upload Resume" id="resume" />
+          <FileInput label="Upload Resume" id="resume" onChange={(e) => setResume(e.target.files[0])}/>
           <Input
             label="Gender"
             placeholder="Enter gender"
@@ -94,25 +95,35 @@ const JobSeekerRegistration = () => {
             placeholder="Reenter password"
             id="password2"
             type="password"
-            value={regValue.password2}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({
-                ...prev,
-                password2: event.target.value,
-              }));
-            }}
+            value={pw2Value}
+            changeHandler={(e) => setPw2value(e.target.value)}
           />
           <p />
           <RobotaButton
             title="Finish Registering"
             type={ButtonTypes.CONTAINED_LARGE}
             onClick={async () => {
+              const url = 'https://robota-355717.uw.r.appspot.com/upload/';
+              // const url = 'http://127.0.0.1:8000/upload/';
+              const formData = new FormData();
+              formData.append('file', resume);
+              const config = {
+                  headers: {
+                    'content-type': 'multipart/form-data'
+                  }
+              };
+              const fileUrl = await axios.post(url, formData, config);
+              const public_uri = fileUrl.data.public_uri;
+              console.log(public_uri);
+              const newRegValue = {...regValue, cv : public_uri};
+              setRegValue(newRegValue);
+              console.log(newRegValue);
               const res = await axios.post(
                 "https://robota-355717.uw.r.appspot.com/user/signup",
-                regValue
+                newRegValue
               );
               console.log(res.data);
-              localStorage["userId"] = res.data.id;
+              localStorage["userId"] = res.data.id
               window.location.href = "/job-seeker-success";
             }}
           />
@@ -127,9 +138,9 @@ const CompanyRegistration = () => {
     name: "",
     email: "",
     description: "",
-    password: "",
-    password2: "",
+    password: ""
   });
+  const [pw2Value, setPw2value] = useState("");
 
   return (
     <div className="d-flex justify-content-center pt-3">
@@ -197,13 +208,8 @@ const CompanyRegistration = () => {
             id="password2"
             type="password"
             subtitle=""
-            value={regValue.password2}
-            changeHandler={(event) => {
-              setRegValue((prev) => ({
-                ...prev,
-                password2: event.target.value,
-              }));
-            }}
+            value={pw2Value}
+            changeHandler={(e) => setPw2value(e.target.value)}
           />
           <p />
           <RobotaButton

@@ -31,3 +31,5 @@ db.sqlite3
 cloud_sql_proxy
 # only add static when deploying
 static
+# gcloud bucket key
+gcloud-bucket.json
