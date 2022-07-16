@@ -14,6 +14,7 @@ const JobSeekerRegistration = () => {
     lname: "",
     email: "",
     gender: "",
+    skills: "",
     cv: "",
     password: "",
     password2: "",
@@ -71,6 +72,18 @@ const JobSeekerRegistration = () => {
             value={regValue.gender}
             changeHandler={(event) => {
               setRegValue((prev) => ({ ...prev, gender: event.target.value }));
+            }}
+          />
+          <p />
+          <Input
+            label="Skills"
+            placeholder="Enter"
+            id="gender"
+            type="text"
+            subtitle="Enter as comma-separated list"
+            value={regValue.gender}
+            changeHandler={(event) => {
+              setRegValue((prev) => ({ ...prev, skills: event.target.value }));
             }}
           />
           <p />
