@@ -45,7 +45,6 @@ const JobCard = ({
         {handleClick && cardActionTitle && (
           <RobotaButton
             title={cardActionTitle}
-            urlPath="#"
             type={ButtonTypes.CONTAINED_LARGE}
             onClick={handleClick}
           />

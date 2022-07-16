@@ -15,7 +15,7 @@ const TextArea = ({
   value = "",
   changeHandler,
 }: TextAreaProps) => (
-  <div className="form-group">
+  <div className="form-group" style={{ minWidth: "100%" }}>
     <label>{label}</label>
     <textarea
       className="form-control"

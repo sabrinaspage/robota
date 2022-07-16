@@ -105,7 +105,6 @@ const JobSeekerRegistration = () => {
           <p />
           <RobotaButton
             title="Finish Registering"
-            urlPath="/job-seeker-success"
             type={ButtonTypes.CONTAINED_LARGE}
             onClick={async () => {
               const res = await axios.post(
@@ -209,7 +208,6 @@ const CompanyRegistration = () => {
           <p />
           <RobotaButton
             title="Finish Registering"
-            urlPath="/company-success"
             type={ButtonTypes.CONTAINED_LARGE}
             onClick={async () => {
               const res = await axios.post(

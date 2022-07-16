@@ -11,24 +11,30 @@ interface JobsProps {
 }
 
 const CompanyListings = ({ id, currentUserType }: JobsProps) => {
-  const [jobValue, setJobValue] = useState([{
-    id: "",
-    company_id: "",
-    description: "",
-    name: "",
-    location: "",
-    skills: ""
-  }]);
+  const [jobValue, setJobValue] = useState([
+    {
+      id: "",
+      company_id: "",
+      description: "",
+      name: "",
+      location: "",
+      skills: "",
+    },
+  ]);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    const companyId = localStorage.getItem('companyId');
+    const companyId = localStorage.getItem("companyId");
     console.log(companyId);
-    axios.post("https://robota-355717.uw.r.appspot.com/company/job", {"company": companyId}).then(response => {
-      setJobValue(response.data);
-      setLoading(false);
-      console.log(response.data);
-    });
+    axios
+      .post("https://robota-355717.uw.r.appspot.com/company/job", {
+        company: companyId,
+      })
+      .then((response) => {
+        setJobValue(response.data);
+        setLoading(false);
+        console.log(response.data);
+      });
   }, []);
 
   if (isLoading) {
@@ -48,25 +54,21 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
         }}
       >
         <h1 className="mt-1 fw-bold">Your Listings</h1>
-        {
-          jobValue
-            .map(job =>
-              <JobCard
-                key={job.id}
-                title={job.name}
-                description={job.description}
-                location={job.location}
-                skills={job.skills}
-                link="" // does not have link
-                handleClick={() => null}
-              />
-            )
-        }
+        {jobValue.map((job) => (
+          <JobCard
+            key={job.id}
+            title={job.name}
+            description={job.description}
+            location={job.location}
+            skills={job.skills}
+            link="" // does not have link
+            handleClick={() => null}
+          />
+        ))}
         <p />
         <RobotaButton
           marginWidth="100%"
           title="Add a Listing"
-          urlPath="#"
           type={ButtonTypes.CONTAINED_LARGE}
         />
         <p />
@@ -77,24 +79,30 @@ const CompanyListings = ({ id, currentUserType }: JobsProps) => {
 
 const JobSeekerMatches = ({ id, currentUserType }: JobsProps) => {
   // call api here to get job seeker's matches
-  const [jobValue, setJobValue] = useState([{
-    id: "",
-    company_id: "",
-    description: "",
-    name: "",
-    location: "",
-    skills: ""
-  }]);
+  const [jobValue, setJobValue] = useState([
+    {
+      id: "",
+      company_id: "",
+      description: "",
+      name: "",
+      location: "",
+      skills: "",
+    },
+  ]);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
     console.log(userId);
-    axios.post("https://robota-355717.uw.r.appspot.com/user/match", {"user": userId}).then(response => {
-      setJobValue(response.data);
-      setLoading(false);
-      console.log(response.data);
-    });
+    axios
+      .post("https://robota-355717.uw.r.appspot.com/user/match", {
+        user: userId,
+      })
+      .then((response) => {
+        setJobValue(response.data);
+        setLoading(false);
+        console.log(response.data);
+      });
   }, []);
 
   if (isLoading) {
@@ -102,7 +110,6 @@ const JobSeekerMatches = ({ id, currentUserType }: JobsProps) => {
   }
 
   return (
-
     <div className="d-flex flex-row bd-highlight h-100">
       <Sidebar currentUserType={currentUserType} />
       <div
@@ -115,24 +122,21 @@ const JobSeekerMatches = ({ id, currentUserType }: JobsProps) => {
         }}
       >
         <h1 className="mt-1 fw-bold">Your Matches</h1>
-        {
-          jobValue
-            .map(job =>
-              <JobCard
-                key={job.id}
-                title={job.name}
-                description={job.description}
-                location={job.location}
-                skills={job.skills}
-                link="" // does not have link
-                handleClick={() => null}
-              />
-            )
-        }
+        {jobValue.map((job) => (
+          <JobCard
+            key={job.id}
+            title={job.name}
+            description={job.description}
+            location={job.location}
+            skills={job.skills}
+            link="" // does not have link
+            handleClick={() => null}
+          />
+        ))}
         <p />
       </div>
     </div>
-  )
+  );
 };
 
 function Jobs() {

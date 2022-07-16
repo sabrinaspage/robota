@@ -8,7 +8,6 @@ export enum ButtonTypes {
 interface SmallButtonProps {
   title: string;
   type: ButtonTypes;
-  urlPath: string;
   marginWidth?: any;
   onClick?: any;
 }
@@ -16,7 +15,6 @@ interface SmallButtonProps {
 const RobotaButton = ({
   title,
   type,
-  //urlPath,
   marginWidth,
   onClick,
 }: SmallButtonProps) => {

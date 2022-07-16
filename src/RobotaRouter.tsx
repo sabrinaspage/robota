@@ -5,6 +5,7 @@ import Jobs from "./pages/Jobs";
 import Registration from "./pages/Registration";
 import Success from "./pages/Success";
 import ItsAMatch from "./pages/ItsAMatch";
+import AddListing from "./pages/AddListing";
 
 function RobotaRouter() {
   return (
@@ -17,6 +18,7 @@ function RobotaRouter() {
       <Route path="/company-listings" element={<Jobs />} />
       <Route path="/user-matches" element={<Jobs />} />
       <Route path="/its-a-match" element={<ItsAMatch />} />
+      <Route path="/add-listing" element={<AddListing />} />
     </Routes>
   );
 }

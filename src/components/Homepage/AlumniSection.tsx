@@ -58,7 +58,6 @@ const AlumniSection = () => (
             <div className="mt-auto">
               <RobotaButton
                 title="Read More"
-                urlPath={storyLink}
                 type={ButtonTypes.CONTAINED_LARGE}
               />
             </div>
