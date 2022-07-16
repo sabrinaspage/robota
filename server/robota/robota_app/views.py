@@ -319,6 +319,42 @@ class RemoveSkillApiView(APIView):
         UserSkill.objects.filter(id=request.data.get('skill_id')).delete()
         return Response({"result": "User removed skill"}, status=status.HTTP_201_CREATED)
 
+# ADD SKILL LIST TO USER
+class AddUserSkillListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    # Create list of JOB skills
+    def post(self, request, *args, **kwargs):
+        '''
+        POST example
+        {
+            "user": 1,
+            "skill_list": ["java", "python", "C++"]
+        }
+        '''
+        # delete all existing job skills
+        UserSkill.objects.filter(user = request.data.get('user')).delete()
+
+        skill_list = request.data.get('skill_list')
+
+        for skill_name in skill_list:
+            data = {
+                "user": request.data.get('user'),
+                "name": skill_name
+            }
+            serializer = UserSkillSerializer(data=data)
+            if serializer.is_valid():
+                # check duplicate 
+                if not UserSkill.objects.filter(user = request.data.get('user'), name = skill_name).exists():
+                    serializer.save()
+                else:
+                    return Response({"error": "{0} already added".format(skill_name)}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                # invalid serializer
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"result": "Skills are added successfully"}, status=status.HTTP_201_CREATED)        
+
 # GET USER SKILL LIST
 class UserSkillApiView(APIView):
     # add permission to check if user is authenticated
