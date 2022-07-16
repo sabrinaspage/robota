@@ -1,16 +1,12 @@
 from hashlib import new
-from django.http.response import HttpResponse
 from rest_framework.views import APIView
-from django.views import View
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from django.forms.models import model_to_dict
 from .models import *
 from .serializers import *
-from django.middleware.csrf import get_token
 from rest_framework.parsers import MultiPartParser
-from django.views.decorators.csrf import csrf_exempt
 
 
 class CompanyApiView(APIView):
