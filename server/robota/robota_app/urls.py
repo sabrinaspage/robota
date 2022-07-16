@@ -20,7 +20,8 @@ from .views import (
     RemoveSkillApiView,
     UserSkillApiView,
     JobUserApiView,
-    MatchingApiView
+    MatchingApiView,
+    UploadView
 )
 
 urlpatterns = [
@@ -45,5 +46,5 @@ urlpatterns = [
     path('company/job/skill', JobSkillApiView.as_view()),
     path('company/job/skill/add', AddJobSkillApiView.as_view()),
     path('company/job/skill/remove', RemoveJobSkillApiView.as_view()),
-
+    path('upload/', UploadView.as_view())
 ]
