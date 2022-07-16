@@ -389,8 +389,45 @@ class RemoveJobSkillApiView(APIView):
             "jobSkill_id" : 1
         }
         '''
-        CompanyJob.objects.filter(id=request.data.get('jobSkill_id')).delete()
-        return Response({"result": "Company removed a job skill"}, status=status.HTTP_201_CREATED)
+        JobSkill.objects.filter(id=request.data.get('jobSkill_id')).delete()
+        return Response({"result": "A skill has been removed from job"}, status=status.HTTP_201_CREATED)
+
+# ADD SKILL LIST TO JOB
+class AddJobSkillListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    # Create list of JOB skills
+    def post(self, request, *args, **kwargs):
+        '''
+        Create a Job skill
+        POST example
+        {
+            "companyJob": 1,
+            "skill_list": ["java", "python", "C++"]
+        }
+        '''
+        # delete all existing job skills
+        JobSkill.objects.filter(companyJob = request.data.get('companyJob')).delete()
+
+        skill_list = request.data.get('skill_list')
+
+        for skill_name in skill_list:
+            data = {
+                "companyJob": request.data.get('companyJob'),
+                "name": skill_name
+            }
+            serializer = JobSkillSerializer(data=data)
+            if serializer.is_valid():
+                # check duplicate 
+                if not JobSkill.objects.filter(companyJob = request.data.get('companyJob'), name = skill_name).exists():
+                    serializer.save()
+                else:
+                    return Response({"error": "{0} already added".format(skill_name)}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                # invalid serializer
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"result": "Skills are added successfully"}, status=status.HTTP_201_CREATED)        
 
 # GET USER JOBS LIST
 class JobUserApiView(APIView):
