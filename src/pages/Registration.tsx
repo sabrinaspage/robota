@@ -99,12 +99,11 @@ const JobSeekerRegistration = () => {
             }
             const fileUrl = await axios.post(url, formData, config);
             const public_uri = fileUrl.data.public_uri;
-            setRegValue({...regValue, cv : public_uri})
-            console.log(public_uri);
-            console.log(regValue);
+            const newRegValue = {...regValue, cv : public_uri};
+            setRegValue(newRegValue);
             const res = await axios.post(
               "https://robota-355717.uw.r.appspot.com/user/signup",
-              regValue
+              newRegValue
             );
             console.log(res.data);
             localStorage["userId"] = res.data.id
