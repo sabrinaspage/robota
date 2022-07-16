@@ -1,11 +1,17 @@
 from hashlib import new
+from django.http.response import HttpResponse
 from rest_framework.views import APIView
+from django.views import View
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from django.forms.models import model_to_dict
 from .models import *
 from .serializers import *
+from django.middleware.csrf import get_token
+from rest_framework.parsers import MultiPartParser
+from django.views.decorators.csrf import csrf_exempt
+
 
 class CompanyApiView(APIView):
     # add permission to check if user is authenticated
@@ -208,6 +214,15 @@ class UserApiView(APIView):
         '''
         users = User.objects.all().values()
         return Response(users, status=status.HTTP_200_OK)
+
+# USER UPLOAD CV
+class UploadView(APIView):
+    parser_classes = (MultiPartParser,)
+
+    def post(self, request, *args, **kwargs):
+            file = request.FILES['file']
+            public_uri = Upload.upload_file(file, file.name)
+            return Response({"public_uri": "{}".format(public_uri)}, status=status.HTTP_201_CREATED)
 
 # USER SIGNUP API
 class SignUpApiView(APIView):

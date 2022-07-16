@@ -1,4 +1,13 @@
 from django.db import models
+from storages.backends.gcloud import GoogleCloudStorage
+from dotenv import load_dotenv
+import os
+from pathlib import Path
+
+load_dotenv()
+env_path = Path('.')/'.env'
+load_dotenv(dotenv_path=env_path)
+storage = GoogleCloudStorage()
 
 #User model
 class User(models.Model):
@@ -70,3 +79,14 @@ class UserSkill(models.Model):
     
     def __str__(self):
         return '{} - {}'.format(self.user, self.name)
+
+# class that allows us to save a file to google storage.
+class Upload:
+    @staticmethod
+    def upload_file(file, filename):
+        try:
+            target_path = os.getenv('GS_PATH_NAME') + filename
+            path = storage.save(target_path, file)
+            return storage.url(path)
+        except Exception as e:
+            print("Failed to upload!")

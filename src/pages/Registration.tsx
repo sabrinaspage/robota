@@ -12,13 +12,14 @@ const JobSeekerRegistration = () => {
     fname: "",
     lname: "",
     email: "",
-    gender: "",
+    gender: 0,
     cv: "",
     password: "",
-    password2: "",
   });
 
-  const [cv, setCV] = useState(null);
+  const [pw2Value, setPw2value] = useState("")
+
+  const [resume, setResume] = useState("");
   return (
     <div>
       <form>
@@ -52,7 +53,7 @@ const JobSeekerRegistration = () => {
             setRegValue((prev) => ({ ...prev, email: event.target.value }));
           }}
         />
-        <FileInput label="Upload Resume" id="resume" value = {cv} onChange={(e) => setCV(e.target.value)}/>
+        <FileInput label="Upload Resume" id="resume" onChange={(e) => setResume(e.target.files[0])}/>
         <Input
           label="Gender"
           placeholder="Enter gender"
@@ -80,16 +81,27 @@ const JobSeekerRegistration = () => {
           id="password2"
           type="password"
           subtitle=""
-          value={regValue.password2}
-          changeHandler={(event) => {
-            setRegValue((prev) => ({ ...prev, password2: event.target.value }));
-          }}
+          value={pw2Value}
+          changeHandler={(e) => setPw2value(e.target.value)}
         />
         <RobotaButton
           title="Finish Registering"
           urlPath="/job-seeker-success"
           type={ButtonTypes.CONTAINED_LARGE}
-          onClick={async () => {            
+          onClick={async () => {
+            const url = 'http://127.0.0.1:8000/upload/';
+            const formData = new FormData();
+            formData.append('file', resume);
+            const config = {
+                headers: {
+                  'content-type': 'multipart/form-data'
+                }
+            }
+            const fileUrl = await axios.post(url, formData, config);
+            const public_uri = fileUrl.data.public_uri;
+            setRegValue({...regValue, cv : public_uri})
+            console.log(public_uri);
+            console.log(regValue);
             const res = await axios.post(
               "https://robota-355717.uw.r.appspot.com/user/signup",
               regValue
