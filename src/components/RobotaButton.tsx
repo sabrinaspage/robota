@@ -18,7 +18,7 @@ const RobotaButton = ({
   marginWidth,
   onClick,
 }: SmallButtonProps) => {
-  if (type == ButtonTypes.OUTLINE_LARGE) {
+  if (type === ButtonTypes.OUTLINE_LARGE) {
     return (
       <button
         role="button"
@@ -30,7 +30,7 @@ const RobotaButton = ({
       </button>
     );
   }
-  if (type == ButtonTypes.CONTAINED_LARGE) {
+  if (type === ButtonTypes.CONTAINED_LARGE) {
     return (
       <button
         role="button"
@@ -43,10 +43,10 @@ const RobotaButton = ({
       </button>
     );
   }
-  if (type == ButtonTypes.OUTLINE_SMALL) {
+  if (type === ButtonTypes.OUTLINE_SMALL) {
     return <button> {title} </button>;
   }
-  if (type == ButtonTypes.CONTAINED_SMALL) {
+  if (type === ButtonTypes.CONTAINED_SMALL) {
     return <button> {title} </button>;
   }
   return <button></button>;
