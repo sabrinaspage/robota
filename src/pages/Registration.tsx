@@ -64,7 +64,11 @@ const JobSeekerRegistration = () => {
             }}
           />
           <p />
-          <FileInput label="Upload Resume" id="resume" onChange={(e) => setResume(e.target.files[0])}/>
+          <FileInput
+            label="Upload Resume"
+            id="resume"
+            onChange={(e) => setResume(e.target.files[0])}
+          />
           <Input
             label="Gender"
             placeholder="Enter gender"
@@ -78,11 +82,11 @@ const JobSeekerRegistration = () => {
           <p />
           <Input
             label="Skills"
-            placeholder="Enter"
-            id="gender"
+            placeholder="Enter skills"
+            id="skills"
             type="text"
             subtitle="Enter as comma-separated list"
-            value={regValue.gender}
+            value={regValue.skills}
             changeHandler={(event) => {
               setRegValue((prev) => ({ ...prev, skills: event.target.value }));
             }}
@@ -116,19 +120,19 @@ const JobSeekerRegistration = () => {
             title="Finish Registering"
             type={ButtonTypes.CONTAINED_LARGE}
             onClick={async () => {
-              const url = 'https://robota-355717.uw.r.appspot.com/upload/';
+              const url = "https://robota-355717.uw.r.appspot.com/upload/";
               // const url = 'http://127.0.0.1:8000/upload/';
               const formData = new FormData();
-              formData.append('file', resume);
+              formData.append("file", resume);
               const config = {
-                  headers: {
-                    'content-type': 'multipart/form-data'
-                  }
+                headers: {
+                  "content-type": "multipart/form-data",
+                },
               };
               const fileUrl = await axios.post(url, formData, config);
               const public_uri = fileUrl.data.public_uri;
               console.log(public_uri);
-              const newRegValue = {...regValue, cv : public_uri};
+              const newRegValue = { ...regValue, cv: public_uri };
               setRegValue(newRegValue);
               console.log(newRegValue);
               const res = await axios.post(
@@ -136,7 +140,7 @@ const JobSeekerRegistration = () => {
                 newRegValue
               );
               console.log(res.data);
-              localStorage["userId"] = res.data.id
+              localStorage["userId"] = res.data.id;
               window.location.href = "/job-seeker-success";
             }}
           />
@@ -151,7 +155,7 @@ const CompanyRegistration = () => {
     name: "",
     email: "",
     description: "",
-    password: ""
+    password: "",
   });
   const [pw2Value, setPw2value] = useState("");
 
