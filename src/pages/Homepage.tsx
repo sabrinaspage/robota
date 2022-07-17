@@ -1,4 +1,3 @@
-import React from "react";
 import CandidatesSection from "../components/Homepage/CandidatesSection";
 import CompanyCarousel from "../components/Homepage/CompanyCarousel";
 import Hero from "../components/Homepage/Hero";

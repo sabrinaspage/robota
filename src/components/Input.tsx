@@ -1,5 +1,3 @@
-import { ChangeEvent, useEffect } from "react";
-
 interface InputProps {
   label: string;
   placeholder: string;

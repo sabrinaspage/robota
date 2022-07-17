@@ -1,6 +1,3 @@
-import { useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import { homepageButtons, homepageLinks } from "../consts/constants";
 import HappyMatch from "../images/happy-match.png";
 
 const JobSeekerSuccess = () => (

@@ -48,6 +48,7 @@ const NavLinks = ({ links, buttons }: NavbarProps) => {
                   {...{ title, urlPath, type }}
                 />
               );
+            return null;
           })}
         </form>
       </span>
