@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import TextArea from "../components/TextArea";
 import { useState } from "react";
 import axios from "axios";
+var randomstring = require("randomstring");
 
 function AddListing() {
   const [jobValue, setJobValue] = useState({
@@ -99,12 +100,16 @@ function AddListing() {
             title="Add now!"
             type={ButtonTypes.CONTAINED_LARGE}
             onClick={async () => {
+              setJobValue((prev) => ({
+                ...prev,
+                company_id: localStorage.getItem("companyId") ?? "",
+                id: randomstring.generate(),
+              }));
               const res = await axios.post(
                 "https://robota-355717.uw.r.appspot.com/company/job/add",
                 jobValue
               );
               console.log(res.data);
-              localStorage["userId"] = res.data.id;
               window.location.href = "/company-listings";
             }}
           />
