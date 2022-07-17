@@ -21,7 +21,6 @@ const RobotaButton = ({
   if (type === ButtonTypes.OUTLINE_LARGE) {
     return (
       <button
-        role="button"
         type="button"
         className={`btn btn-outline-primary btn-border-radius-sm btn-box-shadow ${marginWidth} fw-bold`}
         onClick={onClick}
@@ -33,7 +32,6 @@ const RobotaButton = ({
   if (type === ButtonTypes.CONTAINED_LARGE) {
     return (
       <button
-        role="button"
         type="button"
         style={{ width: marginWidth }}
         className={`btn btn-primary btn-border-radius-sm btn-box-shadow text-white fw-bold`}

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const defaultSelectString = "I want to find talent";
   const [selectedText, setSelectedText] = useState("0");
   console.log(selectedText);
 
@@ -24,10 +23,7 @@ const Hero = () => {
               What brings you to our community?
             </h2>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 ">
-              <Select
-                defaultText={defaultSelectString}
-                setSelectedText={setSelectedText}
-              />
+              <Select setSelectedText={setSelectedText} />
               <button
                 type="button"
                 className="btn btn-primary btn-lg px-4"

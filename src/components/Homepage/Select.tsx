@@ -1,11 +1,8 @@
-import { useState } from "react";
-
 interface SelectProps {
-  defaultText: string;
   setSelectedText: (e?: any) => void;
 }
 
-const Select = ({ defaultText, setSelectedText }: SelectProps) => {
+const Select = ({ setSelectedText }: SelectProps) => {
   return (
     <select
       className="form-select"

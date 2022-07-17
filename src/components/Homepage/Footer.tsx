@@ -15,7 +15,7 @@ const Footer = () => (
         </div>
       </div>
 
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="/">
         <div className="container">
           <img src={RobotaLogo} alt="" width="100" height="100" />
         </div>
@@ -23,17 +23,17 @@ const Footer = () => (
 
       <ul className="nav col-md-4 justify-content-end py-3">
         <li className="nav-item">
-          <a href="#" className="nav-link px-2 text-muted">
+          <a href="/" className="nav-link px-2 text-muted">
             Privacy
           </a>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link px-2 text-muted">
+          <a href="/" className="nav-link px-2 text-muted">
             FAQ
           </a>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link px-2 text-muted">
+          <a href="/" className="nav-link px-2 text-muted">
             Contact US
           </a>
         </li>

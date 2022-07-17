@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Person3 from "../images/alumni-logos/Person3.png";
@@ -11,12 +10,6 @@ interface ProfileProps {
 }
 
 const JobSeekerProfile = ({ currentUserType }: ProfileProps) => {
-  const [isLoading, setLoading] = useState(false);
-
-  if (isLoading) {
-    return <div className="App">Loading...</div>;
-  }
-
   const skills = ["Powerpoint", "Figma", "teamwork"];
 
   return (
@@ -34,7 +27,7 @@ const JobSeekerProfile = ({ currentUserType }: ProfileProps) => {
           className="h-100 overflow-auto ps-4 pt-4"
           style={{ backgroundColor: "white" }}
         >
-          <img style={{ width: 100 }} src={Person3} />
+          <img style={{ width: 100 }} src={Person3} alt="person3" />
           <h1 className="mt-1 fw-bold">
             Grace Gong <span className="fw-normal">(she/her)</span>
           </h1>
@@ -57,7 +50,6 @@ const JobSeekerProfile = ({ currentUserType }: ProfileProps) => {
 
 function Jobs() {
   // call api for type of user and user id
-  const currentUserId = "";
   const currentPath = useLocation().pathname;
 
   return (
